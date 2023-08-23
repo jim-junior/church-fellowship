@@ -147,7 +147,6 @@ function Sidebar() {
 				<DashboardLinks name="Members" link={"/members"} />
 				<DashboardLinks name="Start Meeting" link={"/start-meeting"} />
 				<DashboardLinks name="Schedule" link={"/schedule"} />
-				<DashboardLinks name="Reports" link={"/reports"} />
 
 			</div>
 			<div className="p-4 m-4 bg-secondary rounded-md h-48">

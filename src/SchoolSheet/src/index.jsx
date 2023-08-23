@@ -15,20 +15,13 @@ import Login from './views/Login'
 import Email from './views/auth/Email'
 import Code from './views/auth/Code'
 import PasswordReset from './views/auth/PasswordReset'
-import Settings from './views/settings/Settings'
-import ClassesStreams from './views/settings/ClassesStreams'
-import SubjectsGrading from './views/settings/SubjectsGrading'
-import FeesStrructures from './views/fees/FeesStrructures'
-import Fees from './views/fees/Fees'
-import GroupsAndTypes from './views/members/GroupsAndTypes'
-import ScholarShip from './views/scholarship/ScholarShip'
 import AddMemberForm from './components/members/AddMemberForm'
 import EditMemberForm from './components/members/EditMemberForm'
 import ShowStudentsForm from './components/members/ShowMembersForm'
-import Sample from './views/Sample'
-import RoleGuard from './components/RoleGuard'
 import DesktopLoading from './components/DesktopLoading'
 import Members from './views/members/Members'
+import StartMeeting from './views/meetings/StartMeeting'
+import Schedule from './views/meetings/Schedule'
 
 const router = createBrowserRouter([
   {
@@ -66,40 +59,12 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: '/sample',
-        element: <Sample />,
+        path: '/start-meeting',
+        element: <StartMeeting />,
       },
       {
-        path: '/settings',
-        element: <Settings />,
-      },
-      {
-        path: '/classesStreams',
-        element: <ClassesStreams />,
-      },
-      {
-        path: '/subjectsGrading',
-        element: <SubjectsGrading />,
-      },
-      {
-        path: '/feesStrructures',
-        element: (
-          <RoleGuard allowedRoles={['admin', 'fees']}>
-            <FeesStrructures />
-          </RoleGuard>
-        ),
-      },
-      {
-        path: '/fees',
-        element: (
-          <RoleGuard allowedRoles={['admin', 'fees']}>
-            <Fees />
-          </RoleGuard>
-        ),
-      },
-      {
-        path: '/scholarShip',
-        element: <ScholarShip />,
+        path: '/schedule',
+        element: <Schedule />,
       },
       {
         path: '/members',
@@ -107,15 +72,6 @@ const router = createBrowserRouter([
           <Members />
         ),
       },
-      {
-        path: '/groupsAndTypes',
-        element: (
-          <RoleGuard allowedRoles={['student', 'admin']}>
-            <GroupsAndTypes />
-          </RoleGuard>
-        ),
-      },
-      // students
       {
         path: '/addMemberForm',
         element: (
