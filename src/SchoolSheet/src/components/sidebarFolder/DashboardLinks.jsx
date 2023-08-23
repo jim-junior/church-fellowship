@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { TbLayoutDashboard } from "react-icons/tb";
 
-function DashboardLinks({ name, link }) {
+function DashboardLinks({ name, link, Icon }) {
 	const location = useLocation();
 
 
@@ -17,7 +17,7 @@ function DashboardLinks({ name, link }) {
 				}
 			>
 				<div className="w-4/5 flex">
-					<TbLayoutDashboard
+					<Icon
 						className={
 							location.pathname === link
 								? "w-4 h-4 mt-[2px] text-white"
