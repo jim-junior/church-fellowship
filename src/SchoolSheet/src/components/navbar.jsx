@@ -31,21 +31,6 @@ const Navbar = () => {
 
 
 
-
-	useEffect(() => {
-		const token = localStorage.getItem("schoolSoftToken");
-		const loggedInUser = JSON.parse(localStorage.getItem("schoolSoftUser"));
-		if (token === null || token === undefined) {
-			return navigate("/");
-		} else if (loggedInUser === null || loggedInUser === undefined) {
-			return navigate("/");
-		} else {
-			const { first_name, last_name, email } = loggedInUser;
-			setFirstName(first_name);
-			setLastName(last_name);
-			setEmail(email);
-		}
-	}, [navigate]);
 	return (
 		<div className="mt-2 h-12 flex justify-between">
 			<div></div>

@@ -1,14 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
-  BrowserRouter,
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom'
 import './index.css'
 import store from './store'
 import { Provider } from 'react-redux'
-import App from './App'
 import reportWebVitals from './reportWebVitals'
 import Root from './routes/root'
 import ErrorPage from '../src/errorPage'
@@ -22,44 +20,15 @@ import ClassesStreams from './views/settings/ClassesStreams'
 import SubjectsGrading from './views/settings/SubjectsGrading'
 import FeesStrructures from './views/fees/FeesStrructures'
 import Fees from './views/fees/Fees'
-import GroupsAndTypes from './views/students/GroupsAndTypes'
-import Incomes from './views/finance/Incomes'
-import Expenses from './views/finance/Expenses'
-import Reports from './views/finance/Reports'
-import Invoices from './components/finance/Invoices'
-import Staff from './views/hrm/Staff'
-import PayRoll from './views/hrm/PayRoll'
-import StaffAttendance from './views/hrm/StaffAttendance'
-import Stock from './views/finance/Stock'
-import Assets from './views/finance/Assets'
-import Payments from './views/finance/Payments'
-import StudentAttendance from './views/classes/StudentAttendance'
-import Assessment from './views/classes/Assessment'
-import ReportCards from './views/classes/ReportCards'
-import ReportCardTemplate from './components/classes/ReportCardTemplate'
-import Receipts from './views/finance/Receipts'
-import StaffEditForm from './components/hrm/StaffEditForm'
-import Exams from './components/timeTable/Exams'
-import Lessons from './components/timeTable/Lessons'
-import SchoolCalendar from './components/timeTable/SchoolCalendar'
+import GroupsAndTypes from './views/members/GroupsAndTypes'
 import ScholarShip from './views/scholarship/ScholarShip'
-import Bills from './views/finance/Bills'
-import Equity from './views/finance/Equity'
-import Accounts from './views/finance/Accounts'
-import Liabilities from './views/finance/Liabilities'
-import AddMemberForm from './components/students/AddMemberForm'
-import EditStudentsForm from './components/students/EditStudentsForm'
-import ShowStudentsForm from './components/students/ShowStudentsForm'
+import AddMemberForm from './components/members/AddMemberForm'
+import EditMemberForm from './components/members/EditMemberForm'
+import ShowStudentsForm from './components/members/ShowMembersForm'
 import Sample from './views/Sample'
-import StudentAttendanceComp from './components/classes/StudentAttendanceComp'
-import Journal from '../src/components/finance/Journal'
-import AddTransaction from './components/finance/AddTransaction'
-import Ledger from './components/finance/Ledger'
 import RoleGuard from './components/RoleGuard'
-import PrintTransaction from './components/finance/PrintTransaction'
 import DesktopLoading from './components/DesktopLoading'
-import MarkSheet from './views/classes/MarkSheet'
-import Members from './views/students/Members'
+import Members from './views/members/Members'
 
 const router = createBrowserRouter([
   {
@@ -135,9 +104,7 @@ const router = createBrowserRouter([
       {
         path: '/members',
         element: (
-          <RoleGuard allowedRoles={['student', 'admin']}>
-            <Members />
-          </RoleGuard>
+          <Members />
         ),
       },
       {
@@ -152,162 +119,20 @@ const router = createBrowserRouter([
       {
         path: '/addMemberForm',
         element: (
-          <RoleGuard allowedRoles={['student', 'admin']}>
-            <AddMemberForm />
-          </RoleGuard>
+          <AddMemberForm />
         ),
       },
       {
         path: '/editStudentsForm',
         element: (
-          <RoleGuard allowedRoles={['student', 'admin']}>
-            <EditStudentsForm />
-          </RoleGuard>
+          <EditMemberForm />
         ),
       },
       {
         path: '/showStudentsForm',
         element: (
-          <RoleGuard allowedRoles={['student', 'admin']}>
-            <ShowStudentsForm />
-          </RoleGuard>
+          <ShowStudentsForm />
         ),
-      },
-      // classes
-      {
-        path: '/studentAttendance',
-        element: (
-          <RoleGuard allowedRoles={['student', 'admin']}>
-            <StudentAttendanceComp />
-          </RoleGuard>
-        ),
-      },
-      {
-        path: '/assessment',
-        element: <Assessment />,
-      },
-      {
-        path: '/reportCards',
-        element: <ReportCards />,
-      },
-      // time table
-      {
-        path: '/calendar',
-        element: <SchoolCalendar />,
-      },
-      {
-        path: '/lessons',
-        element: <Lessons />,
-      },
-      {
-        path: '/exams',
-        element: <Exams />,
-      },
-      // finance routes
-      {
-        path: '/incomes',
-        element: <Incomes />,
-      },
-      {
-        path: '/expenses',
-        element: <Expenses />,
-      },
-      {
-        path: '/reports',
-        element: <Reports />,
-      },
-      {
-        path: '/invoices',
-        element: <Invoices />,
-      },
-      {
-        path: '/stock',
-        element: <Stock />,
-      },
-      {
-        path: '/assets',
-        element: <Assets />,
-      },
-      {
-        path: '/payments',
-        element: <Payments />,
-      },
-      {
-        path: '/receipts',
-        element: <Receipts />,
-      },
-      {
-        path: '/bills',
-        element: <Bills />,
-      },
-      {
-        path: '/liabilities',
-        element: <Liabilities />,
-      },
-      {
-        path: '/accounts',
-        element: <Accounts />,
-      },
-      {
-        path: '/equity',
-        element: <Equity />,
-      },
-      {
-        path: '/addTransaction',
-        element: <AddTransaction />,
-      },
-      {
-        path: '/printTransaction',
-        element: <PrintTransaction />,
-      },
-      // hrm routes
-      {
-        path: '/staff',
-        element: (
-          <RoleGuard allowedRoles={['hrm', 'admin']}>
-            <Staff />
-          </RoleGuard>
-        ),
-      },
-      {
-        path: '/staffEditForm',
-        element: (
-          <RoleGuard allowedRoles={['hrm', 'admin']}>
-            <StaffEditForm />
-          </RoleGuard>
-        ),
-      },
-      {
-        path: '/payRoll',
-        element: (
-          <RoleGuard allowedRoles={['hrm', 'admin']}>
-            <PayRoll />
-          </RoleGuard>
-        ),
-      },
-      {
-        path: '/staffAttendance',
-        element: (
-          <RoleGuard allowedRoles={['hrm', 'admin']}>
-            <StaffAttendance />
-          </RoleGuard>
-        ),
-      },
-      {
-        path: '/reportCardTemplate',
-        element: <ReportCardTemplate />,
-      },
-      {
-        path: '/journal',
-        element: <Journal />,
-      },
-      {
-        path: '/ledger/:accountId',
-        element: <Ledger />,
-      },
-      {
-        path: '/markSheet',
-        element: <MarkSheet />,
       },
     ],
   },

@@ -1,48 +1,54 @@
 import React, { useState, useEffect } from 'react'
-import Button from '../Button'
+import { Link, useLocation } from 'react-router-dom'
 import InputField from '../InputField'
 import InputSelect from '../InputSelect'
+import Button from '../Button'
 import Select from 'react-select'
 import { FaRegUserCircle, FaPhone } from 'react-icons/fa'
-import withReactContent from 'sweetalert2-react-content'
-import Swal from 'sweetalert2'
-import { Link } from 'react-router-dom'
 import axiosInstance from '../../axios-instance'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { getSections } from '../../store/schoolSheetSlices/schoolStore'
 import ButtonLoader from '../ButtonLoader'
 
-const AddMemberForm = (props) => {
-  const dispatch = useDispatch()
-  const [init] = useState(true)
+const EditMemberForm = (props) => {
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+  const member = searchParams.get('member')
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
+  const [firstName, setFirstName] = useState('')
+  const [middleName, setMiddleName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [dateOfBirth, setDateOfBirth] = useState('')
+  const [fatherName, setFatherName] = useState('')
+  const [fatherContact, setFatherContact] = useState('')
+  const [motherName, setMotherName] = useState('')
+  const [nationality, setNationality] = useState('')
+  const [residence, setResidence] = useState('')
 
-  const [gender, setGender] = useState('')
+  const [gender, setGender] = useState({})
 
 
-
-  // student info form data
-  const [studentInfo, setStudentInfo] = useState({})
-
-  const onChange = (e) => {
-    setStudentInfo({ ...studentInfo, [e.target.name]: e.target.value })
-  }
-
-  // post student info
-  const [isPosting, setIsPosting] = useState(false)
-
+  const genderOptions = [
+    {
+      label: 'MALE',
+      value: 'male',
+    },
+    {
+      label: 'FEMALE',
+      value: 'female',
+    },
+  ]
 
   return (
     <div className="bg-white h-[90vh] overflow-y-auto">
       <div className="flex bg-gray1 p-3 justify-between">
         <div>
-          <p className="text-primary font-semibold text-md">Add Member</p>
+          <p className="text-primary font-semibold text-md">Update Member</p>
         </div>
         <div>
-          <Link to="/students">
-            <p>Back</p>
-          </Link>
+          <Link to="/members">Back</Link>
         </div>
       </div>
       <div>
@@ -56,24 +62,27 @@ const AddMemberForm = (props) => {
               placeholder="Enter First Name"
               label="First Name"
               name="firstName"
-              onChange={onChange}
+              onChange={(e) => setFirstName(e.target.value)}
+              value={firstName}
               icon={<FaRegUserCircle className="w-3 -ml-7 mt-3" />}
             />
             <InputSelect
               type="text"
               placeholder="Select Gender"
-              label="Gender"
+              label="Genders"
               name="gender"
               selectedOption={gender}
               onChange={setGender}
+              options={genderOptions}
             />
 
             <InputField
               type="text"
               placeholder="Enter Occupation"
               label="Occupation"
-              name="occupation"
-              onChange={onChange}
+              name="occupations"
+              onChange={(e) => setNationality(e.target.value)}
+              value={nationality}
               icon={<FaRegUserCircle className="w-3 -ml-7 mt-3" />}
             />
           </div>
@@ -83,16 +92,17 @@ const AddMemberForm = (props) => {
               placeholder="Enter Middle Name"
               label="Middle Name"
               name="middleName"
-              onChange={onChange}
+              onChange={(e) => setMiddleName(e.target.value)}
+              value={middleName}
               icon={<FaRegUserCircle className="w-3 -ml-7 mt-3" />}
             />
-
             <InputField
               type="text"
               placeholder="Enter Place Of Residence"
               label="Place Of Residence"
               name="residence"
-              onChange={onChange}
+              onChange={(e) => setResidence(e.target.value)}
+              value={residence}
               icon={<FaRegUserCircle className="w-3 -ml-7 mt-3" />}
             />
           </div>
@@ -102,7 +112,8 @@ const AddMemberForm = (props) => {
               placeholder="Enter Last Name"
               label="Last Name"
               name="lastName"
-              onChange={onChange}
+              onChange={(e) => setLastName(e.target.value)}
+              value={lastName}
               icon={<FaRegUserCircle className="w-3 -ml-7 mt-3" />}
             />
             <InputField
@@ -110,7 +121,8 @@ const AddMemberForm = (props) => {
               placeholder="Enter Email Address"
               label="Email"
               name="email"
-              onChange={onChange}
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
               icon={<FaRegUserCircle className="w-3 -ml-7 mt-3" />}
             />
           </div>
@@ -119,22 +131,23 @@ const AddMemberForm = (props) => {
               type="date"
               label="Date Of Birth"
               name="dateOfBirth"
-              onChange={onChange}
+              onChange={(e) => setDateOfBirth(e.target.value)}
+              value={dateOfBirth}
             />
-
             <InputField
               type="text"
               placeholder="Enter Your Phone Number"
               label="Phone Number"
               name="phoneNumber"
-              onChange={onChange}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              value={phoneNumber}
               icon={<FaPhone className="w-3 -ml-7 mt-3" />}
             />
           </div>
         </div>
         <hr className="text-gray2" />
         <p className="text-secondary text-lg font-semibold ml-5 mt-5">
-          Next Of Kin
+          Next of Kin
         </p>
         <div className="flex px-2 -mt-5">
           <div className="w-1/4 p-2">
@@ -143,47 +156,48 @@ const AddMemberForm = (props) => {
               placeholder="Enter NOK Name"
               label="Name"
               name="nok_name"
-              onChange={onChange}
+              onChange={(e) => setFatherName(e.target.value)}
+              value={fatherName}
               icon={<FaRegUserCircle className="w-3 -ml-7 mt-3" />}
             />
           </div>
           <div className="w-1/4 p-2">
             <InputField
               type="text"
-              placeholder="Enter NOK Contact"
+              placeholder="Enter NOK Contacts"
               label="Contact"
-              name="nok_contact"
-              onChange={onChange}
+              onChange={(e) => setFatherContact(e.target.value)}
+              value={fatherContact}
             />
           </div>
           <div className="w-1/4 p-2">
             <InputField
               type="text"
-              placeholder="Enter NOK Relationship"
+              placeholder="Enter Relationship"
               label="Relationship"
-              name="nok_relationship"
-              onChange={onChange}
+              name="motherName"
+              onChange={(e) => setMotherName(e.target.value)}
+              value={motherName}
               icon={<FaRegUserCircle className="w-3 -ml-7 mt-3" />}
             />
           </div>
         </div>
 
       </div>
-      <div className="flex justify-between p-2 ">
+      <div className="flex justify-between p-2">
         <div></div>
-        <div>
-          {isPosting ? (
+        {loading ? (
+          <div>
             <ButtonLoader />
-          ) : (
-            <div>
-              <Button value={'Add Student'} />
-            </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div>
+            <Button value={'Update Student'} />
+          </div>
+        )}
       </div>
-      <br />
     </div>
   )
 }
 
-export default AddMemberForm
+export default EditMemberForm

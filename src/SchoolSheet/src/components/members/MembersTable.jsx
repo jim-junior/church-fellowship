@@ -3,22 +3,11 @@ import '../../assets/styles/main.css'
 import { MdDeleteOutline } from 'react-icons/md'
 import { BsPencilSquare, BsEye } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
-import Pagination from '../Pagination'
 
-const StudentsTable = (props) => {
+const MembersTable = (props) => {
   const {
-    setPage,
-    count,
-    studentData,
-    deleteStudentInfo,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    searchPage,
-    page,
-    searchCount,
-    setSearchCount
+    memberData,
+    deleteMemberInfo,
   } = props
 
   return (
@@ -33,53 +22,53 @@ const StudentsTable = (props) => {
             <th className="p-2 text-primary text-sm text-left">Action</th>
           </thead>
           <tbody>
-            {studentData?.map((student) => {
+            {memberData?.map((member) => {
               return (
                 <tr
                   className="shadow-sm border-l border-gray1 cursor-pointer hover:shadow-md hover:border-l-primary hover:border-l-2  pl-2"
-                  key={student.id}
+                  key={member.id}
                 >
                   <td className="flex pl-2">
                     <div className="rounded-full h-8 w-8 py-1 my-2 text-center text-sm font-semibold  text-primary bg-primary3">
-                      {student.firstName[0]} {student.lastName[0]}
+                      {member.firstName[0]} {member.lastName[0]}
                     </div>
                     <div>
                       <p className="text-sm p-3 -mt-1 text-gray5">
-                        {student.firstName} {student.middleName}{' '}
-                        {student.lastName}
+                        {member.firstName} {member.middleName}{' '}
+                        {member.lastName}
                       </p>
                       <p className="text-red text-xs -mt-3 ml-3">
-                        00{student.id}
+                        00{member.id}
                       </p>
                     </div>
                   </td>
 
                   <td className="text-xs p-3 text-gray5">
-                    {student.residence}
+                    {member.residence}
                   </td>
                   <td className="text-xs p-3 text-gray5">
                     email@gamil.com
                   </td>
                   <td className="text-xs p-3 text-gray5">
-                    {student.gender}
+                    {member.gender}
                   </td>
 
                   <td className="text-xs p-3 w-28 text-gray5 flex justify-between">
                     <MdDeleteOutline
                       className="text-red  w-4 h-4"
                       onClick={() => {
-                        deleteStudentInfo(student)
+                        deleteMemberInfo(member)
                       }}
                     />
                     <Link
                       className="mx-3"
-                      to={`/editStudentsForm?student=${student.id}`}
+                      to={`/editStudentsForm?student=${member.id}`}
                     >
                       <BsPencilSquare className="text-warning h-4 w-4" />
                     </Link>
                     <Link
                       className=""
-                      to={`/showStudentsForm?student=${student.id}`}
+                      to={`/showStudentsForm?student=${member.id}`}
                     >
                       <BsEye className="text-primary h-4 w-4" />
                     </Link>
@@ -90,21 +79,8 @@ const StudentsTable = (props) => {
           </tbody>
         </table>
       </div>
-      {/* Pagination */}
-      <Pagination
-        previousPage={previousPage}
-        nextPage={nextPage}
-        canNextPage={canNextPage}
-        canPrevPage={canPreviousPage}
-        searchPage={searchPage}
-        count={count}
-        page={page}
-        setPage={setPage}
-        searchCount={searchCount}
-        setSearchCount={setSearchCount}
-      />
     </div>
   )
 }
 
-export default StudentsTable
+export default MembersTable

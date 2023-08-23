@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SmallCalendar from "../components/dashboard/SmallCalendar";
 // import Loader from "../components/Loader"
-import StudentsTable2 from "../components/students/StudentsTable2";
+import StudentsTable2 from "../components/members/MembersTable2";
 import "../assets/styles/main.css";
 import "../assets/styles/dashboard.css";
 import BarGraph from "../components/dashboard/BarGraph";
@@ -15,12 +15,6 @@ import axiosInstance from "../axios-instance";
 const Dashboard = () => {
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		const token = localStorage.getItem("schoolSoftToken");
-		if (token === null || token === undefined) {
-			navigate("/");
-		}
-	}, [navigate]);
 
 
 
