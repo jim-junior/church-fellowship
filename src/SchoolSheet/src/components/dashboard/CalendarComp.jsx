@@ -15,8 +15,8 @@ function CalendarComp() {
         slotMinTime = "08:00:00"
         slotMaxTime = "18:00:00"
        
-        eventBackgroundColor = '#193296'
-        eventBorderColor = '#193296'
+        eventBackgroundColor = '#3326AE'
+        eventBorderColor = '#3326AE'
         nowIndicator = 'true'
         scrollTime = 'moment().subtract(50, "minutes").format("HH:mm:ss")'
         events={[

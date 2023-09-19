@@ -1,5 +1,5 @@
 .loginBg {
-    border-top: 100vh solid #FE7D06;
+    border-top: 100vh solid #FF392B;
     border-right: 200px solid transparent;
   }
   .small {
@@ -38,48 +38,48 @@
   .loginBtn {
     text-decoration: none;
     color: #fff;
-    background-color: #193296;
-    border: 1px #193296 solid;
+    background-color: #3326AE;
+    border: 1px #3326AE solid;
   }
   .Btn {
     text-decoration: none;
-    color: #193296;
-    /* background-color: #193296; */
-    border: 1px #193296 solid;
+    color: #3326AE;
+    /* background-color: #3326AE; */
+    border: 1px #3326AE solid;
     width: auto;
   }
   .loginBtn:hover {
-    color: #193296;
+    color: #3326AE;
     background-color: #fff;
-    border: 1px #193296 solid;
+    border: 1px #3326AE solid;
     text-decoration: none;
   }
   .loginBtnSecondary {
     text-decoration: none;
     color: #000;
-    background-color: #FE7D06;
-    border: 1px #FE7D06 solid;
+    background-color: #FF392B;
+    border: 1px #FF392B solid;
   }
   .loginBtnSecondary:hover {
-    color: #FE7D06;
+    color: #FF392B;
     background-color: #fff;
-    border: 1px #FE7D06 solid;
+    border: 1px #FF392B solid;
     text-decoration: none;
   }
   .loginBtn2 {
     text-decoration: none;
     color: #fff;
-    background-color: #193296;
-    border: 1px #193296 solid;
+    background-color: #3326AE;
+    border: 1px #3326AE solid;
     width: 200px;
   }
   .loginBtn2:hover {
-    color: #193296;
+    color: #3326AE;
     background-color: #fff;
-    border: 1px #193296 solid;
+    border: 1px #3326AE solid;
     text-decoration: none;
   }
   .bgdiv{
-    background-color: #193296; 
+    background-color: #3326AE; 
     background-image: linear-gradient(to right, rgb(229 231 235) 75%, rgba(0,0,0,0) 75%); 
   }

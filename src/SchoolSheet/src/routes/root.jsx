@@ -6,7 +6,7 @@ export default function Root() {
 	return (
 		<>
 			<div id="detail">
-				<div className="flex w-full h-screen overflow-hidden bg-gray10">
+				<div className="flex w-full h-screen overflow-hidden bg-gray2">
 					<div className="w-[250px]">
 						<Sidebar />
 					</div>

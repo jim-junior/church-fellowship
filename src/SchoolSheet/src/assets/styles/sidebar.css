@@ -1,9 +1,9 @@
 .iconBox:hover{
-    background-color: #193296;
+    background-color: #3326AE;
     color: #0d6efd;
 }
 .activeNav{
-    background-color: #193296;
+    background-color: #3326AE;
     color: #0d6efd;
 }
 .toolpit{
@@ -14,7 +14,7 @@
     display: block;
 }
 .linkdiv:hover{
-    background-color: #193296;
+    background-color: #3326AE;
     color: #fff;
 }
 .linkdiv:hover  .linkicon{

@@ -44,18 +44,14 @@ const Code = () => {
 		setPosting(false);
 	};
 	return (
-		<div className="flex overflow-hidden h-screen w-full bgdiv">
-			<div className="w-7/12 flex justify-center items-center">
-				<div>
-					<img src="login2.png" className="w-[500px]" alt="Logo" />
-				</div>
-			</div>
+		<div className="flex overflow-hidden h-screen justify-center w-full bg-gray2">
+		
 
 			<div className="w-5/12 p-2 flex justify-center items-center">
 				<div className="bg-white rounded-md shadow-lg p-10 w-[500px]">
 					<div className="flex justify-center">
-						<FaBriefcase className="text-secondary text-3xl mt-2" />
-						<h1 className="font-bold text-4xl mt-1 text-secondary ml-2">
+						<FaBriefcase className="text-primary text-3xl mt-2" />
+						<h1 className="font-bold text-4xl mt-1 text-primary ml-2">
 							School SoftOffice
 						</h1>
 					</div>
