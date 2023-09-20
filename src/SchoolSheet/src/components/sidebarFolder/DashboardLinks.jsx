@@ -27,8 +27,8 @@ function DashboardLinks({ name, link, Icon }) {
 					<p
 						className={
 							location.pathname === link
-								? "text-sm font-light text-white ml-6 "
-								: "text-sm font-light linktext ml-6 "
+								? "text-sm font-light text-white ml-4 truncate"
+								: "text-sm font-light linktext ml-4 truncate"
 						}
 					>
 						{name}

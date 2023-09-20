@@ -33,7 +33,9 @@ const Navbar = () => {
 
 	return (
 		<div className="mt-2 h-12 flex justify-between">
-			<div></div>
+			<div>
+				<p className="text-secondary font-semibold text-2xl">Welcome to prayer room</p>
+			</div>
 
 			<div className="flex" onClick={toggleLog}>
 				<div className="ml-2 relative cursor-pointer">

@@ -38,17 +38,14 @@ const Login = () => {
 	return (
 		<>
 			<div className="flex overflow-hidden h-screen justify-center w-full bg-gray2">
-				
+
 
 				<div className="w-5/12 p-2 flex justify-center items-center">
 					<div className="bg-white rounded-md shadow-lg p-10 w-[500px]">
 						<div className="flex justify-center">
-							<FaBriefcase className="text-primary text-3xl mt-2" />
-							<h1 className="font-bold text-4xl mt-1 text-primary ml-2">
-								Fellowship System
-							</h1>
+							<img src="logo.jpg" className="w-[70%] -mt-10" />
 						</div>
-						<p className="text-center text-primary mt-2">Sign in</p>
+						<p className="text-center text-primary -mt-10">Sign in</p>
 						<p className="text-red m-2 text-center">{loginError}</p>
 						<InputField
 							type="email"

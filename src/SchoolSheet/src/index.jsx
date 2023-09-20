@@ -22,6 +22,8 @@ import DesktopLoading from './components/DesktopLoading'
 import Members from './views/members/Members'
 import StartMeeting from './views/meetings/StartMeeting'
 import Schedule from './views/meetings/Schedule'
+import Attendance from './views/Attendance'
+import Notes from './views/Notes'
 
 const router = createBrowserRouter([
   {
@@ -90,6 +92,18 @@ const router = createBrowserRouter([
           <ShowStudentsForm />
         ),
       },
+      {
+        path: '/attendance',
+        element: (
+          <Attendance/>
+        )
+      },
+      {
+        path: '/notes',
+        element: (
+          <Notes/>
+        )
+      }
     ],
   },
 ])
