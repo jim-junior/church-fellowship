@@ -24,6 +24,7 @@ import StartMeeting from './views/meetings/StartMeeting'
 import Schedule from './views/meetings/Schedule'
 import Attendance from './views/Attendance'
 import Notes from './views/Notes'
+import MemberNotes from './views/MemberNotes'
 
 const router = createBrowserRouter([
   {
@@ -102,6 +103,12 @@ const router = createBrowserRouter([
         path: '/notes',
         element: (
           <Notes/>
+        )
+      },
+      {
+        path: '/memberNotes',
+        element: (
+          <MemberNotes/>
         )
       }
     ],
