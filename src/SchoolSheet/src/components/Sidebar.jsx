@@ -9,27 +9,31 @@ import { SiGotomeeting } from "react-icons/si";
 import { TbLayoutDashboard } from "react-icons/tb";
 import { AiOutlineTeam } from "react-icons/ai";
 import { BiLogoZoom } from "react-icons/bi";
+import {FaMoneyCheckAlt,FaPrayingHands,FaNewspaper} from "react-icons/fa";
+import {BsPencilFill,BsPeopleFill} from "react-icons/bs";
 
 function Sidebar() {
 	const location = useLocation();
 
 
 	return (
-		<div className="bg-white h-screen text-primary2 my-2 -mt-1 pt-5  shadow-xl">
+		<div className="bg-white h-screen text-primary2 my-2 -mt-1  shadow-xl">
 			<div className="flex ml-2 ">
-				
-				<p className="text-secondary  md:text-sm ml-1 font-bold">
-				Mothers ONLINE Fellowship
-				</p>
+				<img src="logo.jpg"/>
 			</div>
-			<div className="h-[75vh] overflow-y-auto">
+			<div className="h-[75vh] overflow-y-auto -mt-5">
 				{/* Dashboard */}
 
 				<DashboardLinks Icon={TbLayoutDashboard} name="Dashboard" link={"/dashboard"} />
 				<DashboardLinks Icon={AiOutlineTeam} name="Members" link={"/members"} />
 				<DashboardLinks Icon={BiLogoZoom} name="Start Meeting" link={"/start-meeting"} />
 				<DashboardLinks Icon={SiGotomeeting} name="Schedule" link={"/schedule"} />
-
+				<DashboardLinks Icon={FaMoneyCheckAlt} name="Tithe & Offertory" link={"/tithe"} />
+				<DashboardLinks Icon={BsPencilFill} name="Notes" link={"/notes"} />
+				<DashboardLinks Icon={BsPeopleFill} name="Testimonies" link={"/testimonies"} />
+				<DashboardLinks Icon={FaPrayingHands} name="Prayer Requests" link={"/prayer"} />
+				<DashboardLinks Icon={FaNewspaper} name="News" link={"/news"} />
+				<DashboardLinks Icon={BsPeopleFill} name="Attendance" link={"/attendance"} />
 			</div>
 			<div className="p-4 m-4 bg-secondary rounded-md h-48">
 				<div className="flex justify-center items-center">

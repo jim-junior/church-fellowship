@@ -3,9 +3,8 @@ import '../../assets/styles/main.css'
 import { MdDeleteOutline } from 'react-icons/md'
 import { BsPencilSquare, BsEye } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
-import Button from '../Button'
 
-const MembersTable = (props) => {
+const NewMembers = (props) => {
   const {
     memberData,
     deleteMemberInfo,
@@ -14,14 +13,6 @@ const MembersTable = (props) => {
   return (
     <div id="studentTable">
       <div className="h-[70vh] overflow-y-auto">
-        <div className='flex w-[60vw]'>
-          <textarea className='h-32 bg-gray1 p-3 text-sm text-gray5 w-full'>
-            Message to send
-          </textarea>
-          <div className='ml-5 w-52 mt-16'>
-            <Button value={"Send Message"} />
-          </div>
-        </div>
         <table id="dmsk" className="mt-4 w-full table-auto">
           <thead style={{ backgroundColor: '#0d6dfd10' }}>
             <th className="p-2 text-primary text-sm text-left">Full Name</th>
@@ -29,6 +20,7 @@ const MembersTable = (props) => {
             <th className="p-2 text-primary text-sm text-left">email</th>
             <th className="p-2 text-primary text-sm text-left">Children</th>
             <th className="p-2 text-primary text-sm text-left">Recommended By</th>
+            <th className="p-2 text-primary text-sm text-left">Action</th>
           </thead>
           <tbody>
             {memberData?.map((member) => {
@@ -64,7 +56,9 @@ const MembersTable = (props) => {
                   <td className="text-xs p-3 text-gray5">
                     email@gamil.com
                   </td>
-
+                  <td className="text-xs p-3 w-28 text-gray5 flex justify-between">
+                    <p className='p-2 rounded-md bg-secondary text-white'>Approve</p>
+                  </td>
                 </tr>
               )
             })}
@@ -75,4 +69,4 @@ const MembersTable = (props) => {
   )
 }
 
-export default MembersTable
+export default NewMembers

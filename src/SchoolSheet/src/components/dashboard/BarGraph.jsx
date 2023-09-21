@@ -11,19 +11,19 @@ function BarGraph() {
 				id: 1,
 				label: '# of Red Votes',
 				data: [12, 15, 3, 5, 2, 3],
-				backgroundColor: '#FE7D06',
+				backgroundColor: '#3326AE',
 			},
 			{
 				id: 2,
 				label: '# of Blue Votes',
 				data: [2, 3, 20, 5, 1, 4],
-				backgroundColor: '#FE7D06',
+				backgroundColor: '#3326AE',
 			},
 			{
 				id: 3,
 				label: '# of Green Votes',
 				data: [3, 10, 13, 15, 21, 10],
-				backgroundColor: '#193296',
+				backgroundColor: '#3326AE',
 			}
 		],
 		responsive: true,

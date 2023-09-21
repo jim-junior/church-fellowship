@@ -5,7 +5,7 @@ import { BsPencilSquare, BsEye } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import Button from '../Button'
 
-const MembersTable = (props) => {
+const AbsentMembers = (props) => {
   const {
     memberData,
     deleteMemberInfo,
@@ -75,4 +75,4 @@ const MembersTable = (props) => {
   )
 }
 
-export default MembersTable
+export default AbsentMembers

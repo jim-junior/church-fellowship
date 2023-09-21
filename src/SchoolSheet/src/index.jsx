@@ -22,6 +22,13 @@ import DesktopLoading from './components/DesktopLoading'
 import Members from './views/members/Members'
 import StartMeeting from './views/meetings/StartMeeting'
 import Schedule from './views/meetings/Schedule'
+import Attendance from './views/Attendance'
+import Notes from './views/Notes'
+import MemberNotes from './views/MemberNotes'
+import Tithe from './views/Tithe'
+import Prayer from './views/Prayer'
+import News from './views/News'
+import Testimonies from './views/Testimonies'
 
 const router = createBrowserRouter([
   {
@@ -90,6 +97,48 @@ const router = createBrowserRouter([
           <ShowStudentsForm />
         ),
       },
+      {
+        path: '/attendance',
+        element: (
+          <Attendance />
+        )
+      },
+      {
+        path: '/notes',
+        element: (
+          <Notes />
+        )
+      },
+      {
+        path: '/memberNotes',
+        element: (
+          <MemberNotes />
+        )
+      },
+      {
+        path: '/tithe',
+        element: (
+          <Tithe />
+        )
+      },
+      {
+        path: '/prayer',
+        element: (
+          <Prayer />
+        )
+      },
+      {
+        path: '/news',
+        element: (
+          <News />
+        )
+      },
+      {
+        path: '/testimonies',
+        element: (
+          <Testimonies />
+        )
+      }
     ],
   },
 ])
