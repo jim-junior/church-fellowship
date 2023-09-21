@@ -28,6 +28,103 @@ const Dashboard = () => {
 						<p className="text-xl text-primary font-semibold">Attendence Graph</p>
 						<BarGraph />
 					</div>
+					<div className="flex bg-primary3 text-primary font-medium">
+						<div className="w-1/4 p-2">
+							Full Name
+						</div>
+						<div className="w-1/4 p-2">
+							Email
+						</div>
+
+						<div className="w-1/4 p-2">
+							Time In
+						</div>
+						<div className="w-1/4 p-2">
+							Time Out
+						</div>
+
+					</div>
+					
+					<div className="flex text-sm text-gray5 hover:bg-gray1 bg-white border-b border-gray2">
+						<div className="w-1/4 p-2">
+							Omeny Robert
+						</div>
+						<div className="w-1/4 p-2">
+							rob@gmail.com
+						</div>
+
+						<div className="w-1/4 p-2">
+						8:00pm
+						</div>
+						<div className="w-1/4 p-2">
+						9:
+						</div>
+
+					</div>
+					<div className="flex text-sm text-gray5 hover:bg-gray1 bg-white border-b border-gray2">
+						<div className="w-1/4 p-2">
+							Omeny Robert
+						</div>
+						<div className="w-1/4 p-2">
+							rob@gmail.com
+						</div>
+
+						<div className="w-1/4 p-2">
+						8:00pm
+						</div>
+						<div className="w-1/4 p-2">
+						9:
+						</div>
+
+					</div>
+					<div className="flex text-sm text-gray5 hover:bg-gray1 bg-white border-b border-gray2">
+						<div className="w-1/4 p-2">
+							Omeny Robert
+						</div>
+						<div className="w-1/4 p-2">
+							rob@gmail.com
+						</div>
+
+						<div className="w-1/4 p-2">
+						8:00pm
+						</div>
+						<div className="w-1/4 p-2">
+						9:
+						</div>
+
+					</div>
+					<div className="flex text-sm text-gray5 hover:bg-gray1 bg-white border-b border-gray2">
+						<div className="w-1/4 p-2">
+							Omeny Robert
+						</div>
+						<div className="w-1/4 p-2">
+							rob@gmail.com
+						</div>
+
+						<div className="w-1/4 p-2">
+						8:00pm
+						</div>
+						<div className="w-1/4 p-2">
+						9:
+						</div>
+
+					</div>
+					<div className="flex text-sm text-gray5 hover:bg-gray1 bg-white border-b border-gray2">
+						<div className="w-1/4 p-2">
+							Omeny Robert
+						</div>
+						<div className="w-1/4 p-2">
+							rob@gmail.com
+						</div>
+
+						<div className="w-1/4 p-2">
+						8:00pm
+						</div>
+						<div className="w-1/4 p-2">
+						9:
+						</div>
+
+					</div>
 				</div>
 				<div className="w-4/12 rounded-md shadow-md bg-white ml-2 overflow-y-auto h-[125vh] p-2">
 					{/* <Doughnut /> */}
@@ -36,180 +133,9 @@ const Dashboard = () => {
 						<SmallCalendar />
 					</div>
 					<br />
-					<div className="bg-gray1 p-2 m-2">
-						<p className="text-xl text-primary font-semibold">
-							Happening Today
-						</p>
-						<div className="xl:block lg:block 2xl:flex sm:block  md:block mt-3">
-							<div className="bg-white p-2 rounded-md  shadow-md h-28 m-1 w-1/2 md:w-full cursor-pointer">
-								<div className="flex">
-									<div className="w-1/2">
-										<p className="text-sm ml-5">Directors Meeting</p>
-									</div>
-									<div className="w-1/2 bg-blue11 rounded-md">
-										<p className="text-sm ml-5 text-primary">Online</p>
-									</div>
-								</div>
-								<div className="flex mt-2">
-									<div className="mt-3 w-20">
-										<center>
-											<FaUserAlt className="w-3 text-secondary" />
-											<p className="text-gray4 text-xs ml-2">Mr Okello</p>
-										</center>
-									</div>
-									<div className="mt-3 ml-5">
-										<center>
-											<GiAlarmClock className="w-4" />
-											<p className="text-gray4 text-xs ml-2">
-												11:30am - 1:00pm
-											</p>
-										</center>
-									</div>
-								</div>
-							</div>
-							<div className="bg-white p-2 rounded-md  shadow-md h-28 m-1 w-1/2 md:w-full cursor-pointer">
-								<div className="flex">
-									<div className="w-1/2">
-										<p className="text-sm ml-5">Staff Meeting</p>
-									</div>
-									<div className="w-1/2 bg-blue11 rounded-md">
-										<p className="text-sm ml-5 text-primary">Offline</p>
-									</div>
-								</div>
-								<div className="flex mt-2">
-									<div className="mt-3 w-20">
-										<center>
-											<FaUserAlt className="w-3 text-secondary" />
-											<p className="text-gray4 text-xs ml-2">Mr Okello</p>
-										</center>
-									</div>
-									<div className="mt-3 ml-5">
-										<center>
-											<GiAlarmClock className="w-4" />
-											<p className="text-gray4 text-xs ml-2">
-												11:30am - 1:00pm
-											</p>
-										</center>
-									</div>
-								</div>
-							</div>
-						</div>
 
-					</div>
 
-					<div className="bg-gray1 p-2 m-2">
-						<p className="text-xl text-primary font-semibold">
-							Upcoming Events
-						</p>
-						<div className="xl:block lg:block 2xl:flex sm:block  md:block mt-3">
-							<div className="bg-white p-2 rounded-md  shadow-md h-28 m-1 w-1/2 md:w-full cursor-pointer">
-								<div className="flex">
-									<div className="w-1/2">
-										<p className="text-sm ml-5">Math Class</p>
-									</div>
-									<div className="w-1/2 bg-blue11 rounded-md">
-										<p className="text-sm ml-5 text-primary">P.5 Green</p>
-									</div>
-								</div>
-								<div className="flex mt-2">
-									<div className="mt-3 w-20">
-										<center>
-											<FaUserAlt className="w-3 text-secondary" />
-											<p className="text-gray4 text-xs ml-2">Mr Okello</p>
-										</center>
-									</div>
-									<div className="mt-3 ml-5">
-										<center>
-											<GiAlarmClock className="w-4" />
-											<p className="text-gray4 text-xs ml-2">
-												11:30am - 1:00pm
-											</p>
-										</center>
-									</div>
-								</div>
-							</div>
-							<div className="bg-white p-2 rounded-md  shadow-md h-28 m-1 w-1/2 md:w-full cursor-pointer">
-								<div className="flex">
-									<div className="w-1/2">
-										<p className="text-sm ml-5">Math Class</p>
-									</div>
-									<div className="w-1/2 bg-blue11 rounded-md">
-										<p className="text-sm ml-5 text-primary">P.5 Green</p>
-									</div>
-								</div>
-								<div className="flex mt-2">
-									<div className="mt-3 w-20">
-										<center>
-											<FaUserAlt className="w-3 text-secondary" />
-											<p className="text-gray4 text-xs ml-2">Mr Okello</p>
-										</center>
-									</div>
-									<div className="mt-3 ml-5">
-										<center>
-											<GiAlarmClock className="w-4" />
-											<p className="text-gray4 text-xs ml-2">
-												11:30am - 1:00pm
-											</p>
-										</center>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div className="xl:block lg:block 2xl:flex sm:block  md:block mt-3">
-							<div className="bg-white p-2 rounded-md  shadow-md h-28 m-1 w-1/2 md:w-full cursor-pointer">
-								<div className="flex">
-									<div className="w-1/2">
-										<p className="text-sm ml-5">Math Class</p>
-									</div>
-									<div className="w-1/2 bg-blue11 rounded-md">
-										<p className="text-sm ml-5 text-primary">P.5 Green</p>
-									</div>
-								</div>
-								<div className="flex mt-2">
-									<div className="mt-3 w-20">
-										<center>
-											<FaUserAlt className="w-3 text-secondary" />
-											<p className="text-gray4 text-xs ml-2">Mr Okello</p>
-										</center>
-									</div>
-									<div className="mt-3 ml-5">
-										<center>
-											<GiAlarmClock className="w-4" />
-											<p className="text-gray4 text-xs ml-2">
-												11:30am - 1:00pm
-											</p>
-										</center>
-									</div>
-								</div>
-							</div>
-							<div className="bg-white p-2 rounded-md  shadow-md h-28 m-1 w-1/2 md:w-full cursor-pointer">
-								<div className="flex">
-									<div className="w-1/2">
-										<p className="text-sm ml-5">Math Class</p>
-									</div>
-									<div className="w-1/2 bg-blue11 rounded-md">
-										<p className="text-sm ml-5 text-primary">P.5 Green</p>
-									</div>
-								</div>
-								<div className="flex mt-2">
-									<div className="mt-3 w-20">
-										<center>
-											<FaUserAlt className="w-3 text-secondary" />
-											<p className="text-gray4 text-xs ml-2">Mr Okello</p>
-										</center>
-									</div>
-									<div className="mt-3 ml-5">
-										<center>
-											<GiAlarmClock className="w-4" />
-											<p className="text-gray4 text-xs ml-2">
-												11:30am - 1:00pm
-											</p>
-										</center>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+
 				</div>
 			</div>
 		</div>

@@ -7,7 +7,7 @@ export default function Root() {
 		<>
 			<div id="detail">
 				<div className="flex w-full h-screen overflow-hidden bg-gray10">
-					<div className="w-[250px]">
+					<div className="w-[300px]">
 						<Sidebar />
 					</div>
 					<div className="w-full ml-4 mr-2">

@@ -47,9 +47,9 @@ const Login = () => {
 				<div className="w-5/12 p-2 flex justify-center items-center">
 					<div className="bg-white rounded-md shadow-lg p-10 w-[500px]">
 						<div className="flex justify-center">
-							<FaBriefcase className="text-secondary text-3xl mt-2" />
-							<h1 className="font-bold text-4xl mt-1 text-secondary ml-2">
-								Fellowship System
+
+							<h1 className="font-bold text-2xl mt-1 text-secondary ml-2">
+								Mothers ONLINE Fellowship
 							</h1>
 						</div>
 						<p className="text-center text-primary mt-2">Sign in</p>
