@@ -70,7 +70,7 @@ const Dashboard = () => {
 						<BarGraph />
 
 					</div>
-					<div className="bg-white shadow h-[40vh] overflow-y-auto rounded-md p-2 mt-2 shadow-md">
+					<div className="bg-white shadow h-[50vh] overflow-y-auto rounded-md p-2 mt-2 shadow-md">
 						<p className="my-2 text-xl font-semibold text-primary">Members who didn't attend Previous Meeting</p>
 						<div className="flex font-medium text-primary bg-gray1">
 							<div className="p-2 w-1/4">
@@ -130,7 +130,7 @@ const Dashboard = () => {
 					<br />
 
 					<p className="m-2 text-xl font-semibold text-primary">Latest News</p>
-					<div className="flex flex-wrap">
+					<div className="flex flex-wrap h-[50vh] overflow-y-auto">
 						{news.map((n) => {
 							return (
 								<div className="p-2  md:w-full sm:w-full ">
