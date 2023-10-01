@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import router from "./Router";
-//import { DatabaseConnection } from "./Database/database";
+import { DatabaseConnection } from "./Database/database";
 import cors from "cors";
 import { join } from "path";
 import cookieParser from "cookie-parser";
@@ -29,13 +29,13 @@ app.get("*", (req: Request, res: Response) => {
 
 
 
-/* DatabaseConnection.initialize()
+DatabaseConnection.initialize()
   .then(() => {
     console.log("Database Connection Successful");
   })
   .catch((error) => {
     console.log(error);
-  }); */
+  });
 
 app.listen(PORT, () => {
   console.log(`Server Running on http://localhost:${PORT}`);

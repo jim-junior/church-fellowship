@@ -42,6 +42,7 @@ export const validatePassword = async (
   hashedPassword: string
 ) => {
   try {
+    console.log(password, hashPassword)
     const result = await compare(password, hashedPassword);
     return result;
   } catch (error) {

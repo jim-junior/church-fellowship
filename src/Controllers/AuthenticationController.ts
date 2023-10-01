@@ -1,7 +1,7 @@
 require("dotenv").config();
 import crypto from "crypto";
 import { Response, Request } from "express";
-import { getMemberByEmail, getMemberById } from "../Entities/Staff";
+import { Staff, getMemberByEmail, getMemberById, getUserPassword } from "../Entities/Staff";
 import {
   createNewToken,
   findByEmail,
@@ -45,7 +45,8 @@ export const handleLogin = async (req: Request, res: Response) => {
         .status(200)
         .end();
     } else {
-      const validatedPassword = await validatePassword(password, user.password);
+      const userWithPass = await getUserPassword(email) as Staff
+      const validatedPassword = await validatePassword(password, userWithPass.password);
 
       const findUserById = await getMemberById(user.id);
 

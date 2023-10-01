@@ -28,9 +28,33 @@ const Login = () => {
 	const expireDate = false;
 
 	const handleLogin = async () => {
-		navigate("/dashboard");
+		setIsLoging(true);
+		
+		try {
+			setIsLoging(true);
+			const response = await axiosInstance.post("/auth/login", formData);
+			const { data } = response;
+			const { status, payload } = data;
+			const { token, user } = payload;
+			if (status) {
+				localStorage.setItem("mothersToken", token);
+				localStorage.setItem("mothersUser", JSON.stringify(user));
+				setIsLoging(false);
+				navigate("/dashboard");
+			} else {
+				toggleFeedback("error", {
+					title: "Error",
+					text: payload,
+				})
+				setIsLoging(false);
+				setLoginError(payload);
+				console.log("error", payload);
+			}
+		} catch (error) {
+			console.log(error);
+			setIsLoging(false);
+		}
 	};
-
 
 
 

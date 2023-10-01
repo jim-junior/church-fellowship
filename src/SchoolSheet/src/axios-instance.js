@@ -15,7 +15,7 @@ const axiosInstance = axios.create({
 });
 
 const requestHandler = (request) => {
-	request.headers.Authorization = `Bearer ${localStorage.getItem('schoolSoftToken')}`;
+	request.headers.Authorization = `Bearer ${localStorage.getItem('mothersToken')}`;
 
 	return request;
 }
