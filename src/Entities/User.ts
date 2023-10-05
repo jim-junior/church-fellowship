@@ -13,6 +13,7 @@ import {
     CreateDateColumn
 } from "typeorm";
 import { Transaction } from "./Transaction";
+import { PrayerRequest } from "./PrayerRequest";
 
 @Entity()
 export class User extends BaseEntity {
@@ -25,7 +26,9 @@ export class User extends BaseEntity {
     @Column()
     phone_number: string;
 
-    @Column()
+    @Column({
+        unique: true
+    })
     email: string;
 
     @CreateDateColumn()
@@ -40,8 +43,16 @@ export class User extends BaseEntity {
     @Column()
     children: number;
 
+    @Column({
+        select: false
+    })
+    password: string;
+
     @OneToMany(() => Transaction, transaction => transaction.user)
     transactions: Transaction[];
+
+    @OneToMany(() => PrayerRequest, prayerRequest => prayerRequest.user)
+    prayerRequests: PrayerRequest[];
 }
 
 export const createUser = async (
@@ -50,7 +61,8 @@ export const createUser = async (
     email: string,
     ref: string,
     is_mother: boolean,
-    children: number
+    children: number,
+    password: string,
 ) => {
     const createUser = new User();
     createUser.full_name = full_name;
@@ -59,6 +71,7 @@ export const createUser = async (
     createUser.ref = ref;
     createUser.is_mother = is_mother;
     createUser.children = children;
+    createUser.password = password
     await createUser.save();
     return createUser;
 }
@@ -78,3 +91,16 @@ export const getUserById = async (id: number) => {
     return user;
 }
 
+export const getUserByEmail = async (email: string) => {
+    const user = User.findOne({
+        where: {
+            email: email
+        }
+    })
+
+    return user
+}
+
+export const getUserPassword = async (email: string) => {
+  return await User.findOne({ where: { email: email }, select: ["password"] });
+}

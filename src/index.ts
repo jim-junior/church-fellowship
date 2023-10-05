@@ -4,8 +4,13 @@ import { DatabaseConnection } from "./Database/database";
 import cors from "cors";
 import { join } from "path";
 import cookieParser from "cookie-parser";
+import http from 'http';
+import { Server } from "socket.io";
 
 const app: Application = express();
+const server = http.createServer(app);
+const io = new Server(server);
+
 export const PORT: string | 3001 = process.env.PORT || 3001;
 
 app.use(cors());
@@ -37,7 +42,13 @@ DatabaseConnection.initialize()
     console.log(error);
   });
 
-app.listen(PORT, () => {
+
+
+
+/* app.listen(PORT, () => {
+  console.log(`Server Running on http://localhost:${PORT}`);
+}); */
+server.listen(PORT, () => {
   console.log(`Server Running on http://localhost:${PORT}`);
 });
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../assets/styles/main.css'
 import InputField from '../../components/InputField'
 import Button from '../../components/Button'
@@ -13,13 +13,28 @@ import { testMemberData } from '../../components/members/members'
 import MostAbsent from '../../components/members/MostAbsent'
 import NewMembers from '../../components/members/NewMembers'
 import AbsentMembers from '../../components/members/AbsentMembers'
+import axiosInstance from '../../axios-instance'
+import { useDispatch, useSelector } from "react-redux"
+import { getRegistrations, getMembers } from '../../store/schoolSheetSlices/schoolStore'
+
 
 const Members = () => {
+  const dispatch = useDispatch()
+  const { registrations, members } = useSelector((state) => state.fellowShipStore)
 
   const [all, setAll] = useState(true);
   const [newm, setNew] = useState(false);
   const [absent, setAbsent] = useState(false);
   const [most, setMost] = useState(false);
+
+  useEffect(() => {
+    dispatch(getMembers())
+    dispatch(getRegistrations())
+  }, [dispatch])
+
+
+
+
 
   const showAll = () => {
     setAll(true);
@@ -83,9 +98,9 @@ const Members = () => {
 
         </div>
         <div className="m-5">
-          {all ? <MembersTable memberData={testMemberData} /> : null}
+          {all ? <MembersTable memberData={members} /> : null}
           {most ? <MostAbsent memberData={testMemberData} /> : null}
-          {newm ? <NewMembers memberData={testMemberData} /> : null}
+          {newm ? <NewMembers memberData={registrations} /> : null}
           {absent ? <AbsentMembers memberData={testMemberData} /> : null}
         </div>
       </div>
@@ -94,3 +109,5 @@ const Members = () => {
 }
 
 export default Members
+
+

@@ -32,7 +32,10 @@ export class Registration extends BaseEntity {
     @CreateDateColumn()
     created_at: Date;
 
-    @Column()
+    @Column({
+        nullable: true,
+        default: null
+    })
     ref: string;
 
     @Column()
@@ -45,7 +48,17 @@ export class Registration extends BaseEntity {
     registration_ref: string;
 
     @Column()
+    password: string;
+
+    @Column({
+        nullable: true
+    })
     device_id: string;
+
+    @Column({
+        default: false,
+    })
+    approved: boolean;
 }
 
 export const createSixDigitCode = () => {
@@ -57,9 +70,10 @@ export const createNewRegistration = async (
     full_name: string,
     phone_number: string,
     email: string,
-    ref: string,
     is_mother: boolean,
     children: number,
+    password: string,
+    ref: string = "",
     device_id: string = ""
 ) => {
     const createRegistration = new Registration();
@@ -71,6 +85,7 @@ export const createNewRegistration = async (
     createRegistration.children = children;
     createRegistration.registration_ref = createSixDigitCode().toString();
     createRegistration.device_id = device_id;
+    createRegistration.password = password
     await createRegistration.save();
     return createRegistration;
 }
@@ -91,8 +106,11 @@ export const createUserFromRegistration = async (
             reg.email,
             reg.ref,
             reg.is_mother,
-            reg.children
+            reg.children,
+            reg.password
         );
+        reg.approved = true
+        await reg.save()
         return user;
     } else {
         return null;
@@ -106,4 +124,22 @@ export const getRegistrationByRef = async (registration_ref: string) => {
         }
     });
     return registration;
+}
+
+export const getUnApprovedRegistration = async () => {
+    const registrations = await Registration.find({
+        where: {
+            approved: false
+        }
+    })
+
+    return registrations
+}
+
+export const getRegistrationByEmail = async (email: string) => {
+    return await Registration.findOne({
+        where: {
+            email: email
+        }
+    })
 }

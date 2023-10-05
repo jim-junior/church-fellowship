@@ -33,39 +33,7 @@ const MembersTable = (props) => {
           <tbody>
             {memberData?.map((member) => {
               return (
-                <tr
-                  className="shadow-sm border-l border-gray1 cursor-pointer hover:shadow-md hover:border-l-primary hover:border-l-2  pl-2"
-                  key={member.id}
-                >
-                  <td className="flex pl-2">
-                    <div className="rounded-full h-8 w-8 py-1 my-2 text-center text-sm font-semibold  text-primary bg-primary3">
-                      {member.firstName[0]} {member.lastName[0]}
-                    </div>
-                    <div>
-                      <p className="text-sm p-3 -mt-1 text-gray5">
-                        {member.firstName} {member.middleName}{' '}
-                        {member.lastName}
-                      </p>
-                      <p className="text-red text-xs -mt-3 ml-3">
-                        00{member.id}
-                      </p>
-                    </div>
-                  </td>
-
-                  <td className="text-xs p-3 text-gray5">
-                    {member.residence}
-                  </td>
-                  <td className="text-xs p-3 text-gray5">
-                    email@gamil.com
-                  </td>
-                  <td className="text-xs p-3 text-gray5">
-                    {member.gender}
-                  </td>
-                  <td className="text-xs p-3 text-gray5">
-                    email@gamil.com
-                  </td>
-
-                </tr>
+                <Memeber member={member} key={member.id} />
               )
             })}
           </tbody>
@@ -76,3 +44,44 @@ const MembersTable = (props) => {
 }
 
 export default MembersTable
+
+
+function Memeber({ member }) {
+  //const [loading, setLoading] = useState(false)
+
+
+
+  return (
+    <tr
+      className="shadow-sm border-l border-gray1 cursor-pointer hover:shadow-md hover:border-l-primary hover:border-l-2  pl-2"
+    >
+      <td className="flex pl-2">
+        <div className="rounded-full h-8 w-8 py-1 my-2 text-center text-sm font-semibold  text-primary bg-primary3">
+          {member.full_name[0]}
+        </div>
+        <div>
+          <p className="text-sm p-3 -mt-1 text-gray5">
+            {member.full_name}
+          </p>
+          <p className="text-red text-xs -mt-3 ml-3">
+            00{member.id}
+          </p>
+        </div>
+      </td>
+
+      <td className="text-xs p-3 text-gray5">
+        {member.phone_number}
+      </td>
+      <td className="text-xs p-3 text-gray5">
+        {member.email}
+      </td>
+      <td className="text-xs p-3 text-gray5">
+        {member.children}
+      </td>
+      <td className="text-xs p-3 text-gray5">
+        {member.ref}
+      </td>
+
+    </tr>
+  )
+}

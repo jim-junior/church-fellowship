@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import schoolSheetReducer from "./schoolSheetSlices/schoolStore";
+import FellowShipReducer from "./schoolSheetSlices/schoolStore";
 
 const store = configureStore({
-	reducer: { schoolStore: schoolSheetReducer },
+	reducer: { fellowShipStore: FellowShipReducer },
 });
 export default store;
