@@ -1,8 +1,7 @@
 import { Router } from "express";
-import { handleGetAllUsers, handleLogin, handleGetAuthUser } from "../Controllers/UsersController";
+import { handleCreateNews, handleGetLatestNews, handleGetNews } from "../Controllers/NewsController";
 import { JWTAuthMiddleWare } from "../Middlewares/AuthMiddleware";
 import multer from "multer";
-
 const storage = multer.diskStorage({
   destination: "useruploads/",
   filename: function (req, file, cb) {
@@ -13,11 +12,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-const profilePictureUpload = upload.single("photo");
+const newsImage = upload.single("photo");
+
 
 export default (router: Router) => {
-  const usersPrefix = "/users";
-  router.get(`${usersPrefix}`, handleGetAllUsers);
-  router.post(`${usersPrefix}/login`, handleLogin)
-  router.get(`${usersPrefix}/auth`, JWTAuthMiddleWare, handleGetAuthUser)
+  const newsPrefix = "/news";
+  router.get(`${newsPrefix}`, handleGetNews);
+  router.get(`${newsPrefix}/latest`, handleGetLatestNews);
+  router.post(`${newsPrefix}/create`, JWTAuthMiddleWare, newsImage, handleCreateNews);
 };

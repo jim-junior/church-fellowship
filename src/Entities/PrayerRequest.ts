@@ -53,13 +53,16 @@ export const createPrayerRequest = async (
 export const getPrayerRequestById = async (id: number) => {
   const prayerRequest = await PrayerRequest.findOne({
     where: { id },
+    relations: ["user"],
   });
 
   return prayerRequest;
 };
 
 export const getPrayerRequests = async () => {
-  const prayerRequests = await PrayerRequest.find();
+  const prayerRequests = await PrayerRequest.find({
+    relations: ["user"],
+  });
 
   return prayerRequests;
 };

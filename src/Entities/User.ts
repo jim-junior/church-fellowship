@@ -14,6 +14,7 @@ import {
 } from "typeorm";
 import { Transaction } from "./Transaction";
 import { PrayerRequest } from "./PrayerRequest";
+import { Testimony } from "./Testimony";
 
 @Entity()
 export class User extends BaseEntity {
@@ -48,11 +49,19 @@ export class User extends BaseEntity {
     })
     password: string;
 
+    @Column({
+        nullable: true
+    })
+    profile_picture: string;
+
     @OneToMany(() => Transaction, transaction => transaction.user)
     transactions: Transaction[];
 
     @OneToMany(() => PrayerRequest, prayerRequest => prayerRequest.user)
     prayerRequests: PrayerRequest[];
+
+    @OneToMany(() => Testimony, testimony => testimony.user)
+    testimonies: Testimony[];
 }
 
 export const createUser = async (

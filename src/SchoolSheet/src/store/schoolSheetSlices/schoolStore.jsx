@@ -22,16 +22,44 @@ export const getMembers = createAsyncThunk("/fellowship/members", async () => {
 	if (status) return payload;
 });
 
+export const getTestimonies = createAsyncThunk("/fellowship/testimonies", async () => {
+	const resp = await axiosInstance.get("/testimonies/get");
+	const { data } = resp;
+	const { status, payload } = data;
+	if (status) return payload;
+});
+
+export const getPrayerRequests = createAsyncThunk("/fellowship/prayerRequests", async () => {
+	const resp = await axiosInstance.get("/prayer-requets/get");
+	const { data } = resp;
+	const { status, payload } = data;
+	if (status) return payload;
+});
+
+export const getNews = createAsyncThunk("/fellowship/news", async () => {
+	const resp = await axiosInstance.get("/news");
+	const { data } = resp;
+	const { status, payload } = data;
+	if (status) return payload;
+});
+
+
 export const MothersFellowShipSlices = createSlice({
 	name: "FellowShipSlices",
 	initialState: {
 		streams: [],
 		registrations: [],
 		members: [],
+		testimonies: [],
+		prayerRequests: [],
+		news: [],
 		loading: {
 			streams: false,
 			registrations: false,
-			members: false
+			members: false,
+			testimonies: false,
+			prayerRequests: false,
+			news: false,
 		},
 	},
 	extraReducers: {
@@ -64,6 +92,36 @@ export const MothersFellowShipSlices = createSlice({
 		},
 		[getMembers.rejected]: (state) => {
 			state.loading.members = false;
+		},
+		[getTestimonies.pending]: (state) => {
+			state.loading.testimonies = true;
+		},
+		[getTestimonies.fulfilled]: (state, action) => {
+			state.loading.testimonies = false;
+			state.testimonies = action.payload;
+		},
+		[getTestimonies.rejected]: (state) => {
+			state.loading.testimonies = false;
+		},
+		[getPrayerRequests.pending]: (state) => {
+			state.loading.prayerRequests = true;
+		},
+		[getPrayerRequests.fulfilled]: (state, action) => {
+			state.loading.prayerRequests = false;
+			state.prayerRequests = action.payload;
+		},
+		[getPrayerRequests.rejected]: (state) => {
+			state.loading.prayerRequests = false;
+		},
+		[getNews.pending]: (state) => {
+			state.loading.news = true;
+		},
+		[getNews.fulfilled]: (state, action) => {
+			state.loading.news = false;
+			state.news = action.payload;
+		},
+		[getNews.rejected]: (state) => {
+			state.loading.news = false;
 		},
 	},
 });
