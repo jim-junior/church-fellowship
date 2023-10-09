@@ -51,7 +51,9 @@ export class Transaction extends BaseEntity {
     @Column()
     reason: string;
 
-    @ManyToOne(() => User, user => user.transactions)
+    @ManyToOne(() => User, user => user.transactions, {
+        eager: true
+    })
     @JoinColumn()
     user: User;
 
