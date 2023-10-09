@@ -2,13 +2,7 @@ import { Router } from "express";
 import { handleCreateNews, handleGetLatestNews, handleGetNews } from "../Controllers/NewsController";
 import { JWTAuthMiddleWare } from "../Middlewares/AuthMiddleware";
 import multer from "multer";
-const storage = multer.diskStorage({
-  destination: "useruploads/",
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + "-" + file.originalname);
-  },
-});
+const storage = multer.memoryStorage();
 
 const upload = multer({ storage });
 

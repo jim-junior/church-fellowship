@@ -29,11 +29,16 @@ import Tithe from './views/Tithe'
 import Prayer from './views/Prayer'
 import News from './views/News'
 import Testimonies from './views/Testimonies'
+import VerifyTransaction from './views/VerifyTransaction'
 
 const router = createBrowserRouter([
   {
     path: '/email',
     element: <Email />,
+  },
+  {
+    path: '/transaction/pesapal/verify',
+    element: <VerifyTransaction />,
   },
   {
     path: '/passwordReset',

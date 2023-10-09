@@ -196,7 +196,7 @@ const News = () => {
                         <div className="w-1/2">
                             <div className="flex rounded-md border border-gray1 shadow p-2 m-2 h-52">
                                 <div className="w-5/12">
-                                    <img src={UPLOADS_URL + n.image} alt={n.title} className="w-full h-full object-cover" />
+                                    <img src={n.image} alt={n.title} className="w-full h-full object-cover" />
                                 </div>
                                 <div className="w-7/12 ml-2">
                                     <p className="text-primary font-medium text-lg">{n.title}</p>

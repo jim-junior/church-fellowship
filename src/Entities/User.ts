@@ -15,6 +15,10 @@ import {
 import { Transaction } from "./Transaction";
 import { PrayerRequest } from "./PrayerRequest";
 import { Testimony } from "./Testimony";
+import { Meeting } from "./Meeting";
+import { Message } from "./Message";
+import { Note } from "./Notes";
+
 
 @Entity()
 export class User extends BaseEntity {
@@ -62,6 +66,24 @@ export class User extends BaseEntity {
 
     @OneToMany(() => Testimony, testimony => testimony.user)
     testimonies: Testimony[];
+
+    @OneToMany(() => Message, message => message.sender)
+    sent_messages: Message[];
+
+    @OneToMany(() => Message, message => message.reciever)
+    recieved_messages: Message[];
+
+    @OneToMany(() => Note, note => note.user)
+    notes: Note[];
+
+    @Column({
+        nullable: true,
+        select: false
+    })
+    reset_token: string;
+
+
+
 }
 
 export const createUser = async (
@@ -112,4 +134,74 @@ export const getUserByEmail = async (email: string) => {
 
 export const getUserPassword = async (email: string) => {
   return await User.findOne({ where: { email: email }, select: ["password"] });
+}
+
+export const updateProfilePicture = async (id: number, profile_picture: string) => {
+    const user = await User.findOne({
+        where: {
+            id
+        }
+    })
+
+    if (!user) {
+        throw new Error("User not found")
+    }
+
+    user.profile_picture = profile_picture;
+    await user.save();
+
+    return user;
+}
+
+export const getRessetToken = async (email: string) => {
+    const user = await User.findOne({
+        where: {
+            email
+        },
+        select: ["reset_token"]
+    })
+
+    if (!user) {
+        throw new Error("User not found")
+    }
+
+    return user.reset_token;
+}
+
+export const generateSixDigitCode = () => {
+    return Math.floor(100000 + Math.random() * 900000);
+}
+
+export const updateResetToken = async (email: string) => {
+    const user = await User.findOne({
+        where: {
+            email
+        }
+    })
+
+    if (!user) {
+        throw new Error("User not found")
+    }
+
+    user.reset_token = generateSixDigitCode().toString();
+    await user.save();
+
+    return user.reset_token;
+}
+
+export const updatePassword = async (email: string, password: string) => {
+    const user = await User.findOne({
+        where: {
+            email
+        }
+    })
+
+    if (!user) {
+        throw new Error("User not found")
+    }
+
+    user.password = password;
+    await user.save();
+
+    return user;
 }

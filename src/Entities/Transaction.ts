@@ -60,6 +60,11 @@ export class Transaction extends BaseEntity {
     })
     device_id: string;
 
+    @Column({
+        nullable: true
+    })
+    order_id: string;
+
 }
 
 export const createMMTransaction = async (
@@ -105,6 +110,17 @@ export const getTransactionByTxRef =  async (tx_ref: string) => {
         where: {
             tx_ref
         }
+    })
+
+    return trans
+}
+
+export const getAllSuccessfulTransactions = async () => {
+    const trans = await Transaction.find({
+        where: {
+            status: "success"
+        },
+        relations: ["user"]
     })
 
     return trans

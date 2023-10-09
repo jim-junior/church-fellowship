@@ -6,6 +6,7 @@ import { join } from "path";
 import cookieParser from "cookie-parser";
 import http from 'http';
 import { Server } from "socket.io";
+import { handleChatRoom, handleUserChat } from "./Handlers/ChatRoom";
 
 const app: Application = express();
 const server = http.createServer(app);
@@ -31,6 +32,14 @@ app.get("*", (req: Request, res: Response) => {
   res.sendFile(join(__dirname, "SchoolSheet/build", "index.html"));
 });
 
+function handleConnection(socket: any) {
+  handleChatRoom(io, socket);
+  handleUserChat(io, socket);
+}
+
+io.on('connection', (socket) => {
+  handleConnection(socket);
+});
 
 
 
@@ -44,10 +53,6 @@ DatabaseConnection.initialize()
 
 
 
-
-/* app.listen(PORT, () => {
-  console.log(`Server Running on http://localhost:${PORT}`);
-}); */
 server.listen(PORT, () => {
   console.log(`Server Running on http://localhost:${PORT}`);
 });

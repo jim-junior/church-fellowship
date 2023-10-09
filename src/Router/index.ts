@@ -5,6 +5,9 @@ import UserRoutes from "./UserRoutes";
 import PrayerRequestRoutes from "./PrayerRequestRoutes";
 import TestimonyRoutes from "./TestimonyRoutes";
 import NewsRouter from "./NewsRouter";
+import TransactionRoutes from "./TransactionRoutes";
+import MeetingRoutes from "./MeetingRoutes";
+import NotesRoutes from "./NotesRoutes";
 
 const router = Router();
 
@@ -15,5 +18,8 @@ export default (): Router => {
   PrayerRequestRoutes(router)
   TestimonyRoutes(router)
   NewsRouter(router)
+  TransactionRoutes(router)
+  MeetingRoutes(router)
+  NotesRoutes(router)
   return router;
 };

@@ -1,8 +1,7 @@
 
 require("dotenv").config();
 //@ts-ignore
-import * as Flutterwave from "flutterwave-node-v3";
-
+import Flutterwave from "flutterwave-node-v3";
 
 export async function charge_mobile_money(
     phone_number: string,
@@ -24,6 +23,9 @@ export async function charge_mobile_money(
         tx_ref: tx_ref
     }
     const res = await flw.MobileMoney.uganda(payload)
-    
+
+
+
     return res
 }
+

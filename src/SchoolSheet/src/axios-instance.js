@@ -4,7 +4,7 @@ import axios from "axios";
 //const HOST_URL = "https://schoolsoftapp-3432013afef6.herokuapp.com";
 //const HOST_URL = "https://reports.busiatrust.ac.ug";
 
-const HOST_URL = "http://localhost:3001";
+const HOST_URL = "http://192.168.43.171:3001";
 
 
 export const UPLOADS_URL = HOST_URL + "/useruploads/";

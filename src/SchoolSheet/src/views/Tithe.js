@@ -1,29 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputField from "../components/InputField";
 import { BsFilter, BsSearch } from "react-icons/bs";
 import Button from "../components/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { getTransactions } from "../store/schoolSheetSlices/schoolStore";
 
 const Tithe = () => {
+    const dispatch = useDispatch();
+    const { transactions } = useSelector((state) => state.fellowShipStore);
+    const [tithe, setTithe] = useState([]);
+    const [offertory, setOffertory] = useState([]);
 
-    const memberData1 = [
-        { id: 1, firstName: "Omeny", lastName: "Robert", contact: "07788787", email: "250,0000" },
-        { id: 1, firstName: "Akao", lastName: "Teddy", contact: "07788787", email: "50,0000" },
-        { id: 1, firstName: "Mukasa", lastName: "Solomon", contact: "0758999", email: "250,0000" },
-        { id: 1, firstName: "Muwonge", lastName: "John", contact: "07788787", email: "20,0000" },
-        { id: 1, firstName: "Omeny", lastName: "Robert", contact: "07788787", email: "150,0000" },
-        { id: 1, firstName: "Omeny", lastName: "Robert", contact: "07788787", email: "50,0000" },
-        { id: 1, firstName: "Omeny", lastName: "Robert", contact: "07788787", email: "250,0000" },
-    ]
+    useEffect(() => {
+        dispatch(getTransactions());
+    }, [dispatch])
 
-    const memberData2 = [
-        { id: 1, firstName: "Omeny", lastName: "Robert", contact: "07788787", email: "250,0000" },
-        { id: 1, firstName: "Akao", lastName: "Teddy", contact: "07788787", email: "50,0000" },
-        { id: 1, firstName: "Mukasa", lastName: "Solomon", contact: "0758999", email: "250,0000" },
-        { id: 1, firstName: "Muwonge", lastName: "John", contact: "07788787", email: "20,0000" },
-        { id: 1, firstName: "Omeny", lastName: "Robert", contact: "07788787", email: "150,0000" },
-        { id: 1, firstName: "Omeny", lastName: "Robert", contact: "07788787", email: "50,0000" },
-        { id: 1, firstName: "Omeny", lastName: "Robert", contact: "07788787", email: "250,0000" },
-    ]
+    useEffect(() => {
+        const tithe_ = transactions.filter((transaction) => transaction.transaction_type === "TITHE");
+        const offertory_ = transactions.filter((transaction) => transaction.transaction_type === "OFFERTORY");
+        setTithe(tithe_);
+        setOffertory(offertory_);
+    }, [transactions])
+
+
+
+
 
     const [show, setShow] = useState(false);
 
@@ -77,32 +78,33 @@ const Tithe = () => {
 
                     </thead>
                     <tbody>
-                        {memberData1?.map((member) => {
+                        {tithe?.map((member) => {
                             return (
                                 <tr
                                     className="shadow-sm border-l border-gray1 cursor-pointer hover:shadow-md hover:border-l-primary hover:border-l-2  pl-2"
                                     key={member.id}
                                 >
                                     <td className="text-xs p-3 text-gray5">
-                                        20-09-2023
+                                        {
+                                            new Date(member.created_at).toLocaleDateString()
+                                        }
                                     </td>
                                     <td className="flex pl-2">
 
                                         <div>
                                             <p className="text-sm p-3 -mt-1 text-gray5">
-                                                {member.firstName}
-                                                {member.lastName}
+                                                {member.user?.full_name}
                                             </p>
 
                                         </div>
                                     </td>
 
                                     <td className="text-xs p-3 text-gray5">
-                                        {member.contact}
+                                        {member.user?.phone_number}
                                     </td>
 
                                     <td className="text-xs p-3 text-gray5">
-                                        {member.email}
+                                        {member.amount}
                                     </td>
 
 
@@ -115,7 +117,9 @@ const Tithe = () => {
                                 Total
                             </td>
                             <td className="p-2">
-                                2,509,000
+                                {
+                                    tithe.reduce((acc, curr) => acc + curr.amount, 0)
+                                }
                             </td>
                         </tr>
                     </tbody>
@@ -158,32 +162,33 @@ const Tithe = () => {
 
                     </thead>
                     <tbody>
-                        {memberData2?.map((member) => {
+                        {offertory?.map((member) => {
                             return (
                                 <tr
                                     className="shadow-sm border-l border-gray1 cursor-pointer hover:shadow-md hover:border-l-primary hover:border-l-2  pl-2"
                                     key={member.id}
                                 >
                                     <td className="text-xs p-3 text-gray5">
-                                        20-09-2023
+                                        {
+                                            new Date(member.created_at).toLocaleDateString()
+                                        }
                                     </td>
                                     <td className="flex pl-2">
 
                                         <div>
                                             <p className="text-sm p-3 -mt-1 text-gray5">
-                                                {member.firstName}
-                                                {member.lastName}
+                                                {member.user?.full_name}
                                             </p>
 
                                         </div>
                                     </td>
 
                                     <td className="text-xs p-3 text-gray5">
-                                        {member.contact}
+                                        {member.user?.phone_number}
                                     </td>
 
                                     <td className="text-xs p-3 text-gray5">
-                                        {member.email}
+                                        {member.amount}
                                     </td>
 
 
@@ -196,7 +201,9 @@ const Tithe = () => {
                                 Total
                             </td>
                             <td className="p-2">
-                                2,509,000
+                                {
+                                    offertory.reduce((acc, curr) => acc + curr.amount, 0)
+                                }
                             </td>
                         </tr>
                     </tbody>

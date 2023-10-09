@@ -43,6 +43,27 @@ export const getNews = createAsyncThunk("/fellowship/news", async () => {
 	if (status) return payload;
 });
 
+export const getTransactions = createAsyncThunk("/fellowship/transactions", async () => {
+	const resp = await axiosInstance.get("/transaction/successful");
+	const { data } = resp;
+	const { status, payload } = data;
+	if (status) return payload;
+});
+
+export const getMeetings = createAsyncThunk("/fellowship/meetings", async () => {
+	const resp = await axiosInstance.get("/meetings/get");
+	const { data } = resp;
+	const { status, payload } = data;
+	if (status) return payload;
+});
+
+export const getNotes = createAsyncThunk("/fellowship/notes", async () => {
+	const resp = await axiosInstance.get("/notes");
+	const { data } = resp;
+	const { status, payload } = data;
+	if (status) return payload;
+});
+
 
 export const MothersFellowShipSlices = createSlice({
 	name: "FellowShipSlices",
@@ -53,6 +74,9 @@ export const MothersFellowShipSlices = createSlice({
 		testimonies: [],
 		prayerRequests: [],
 		news: [],
+		transactions: [],
+		meetings: [],
+		notes: [],
 		loading: {
 			streams: false,
 			registrations: false,
@@ -60,6 +84,9 @@ export const MothersFellowShipSlices = createSlice({
 			testimonies: false,
 			prayerRequests: false,
 			news: false,
+			transactions: false,
+			meetings: false,
+			notes: false,
 		},
 	},
 	extraReducers: {
@@ -122,6 +149,36 @@ export const MothersFellowShipSlices = createSlice({
 		},
 		[getNews.rejected]: (state) => {
 			state.loading.news = false;
+		},
+		[getTransactions.pending]: (state) => {
+			state.loading.transactions = true;
+		},
+		[getTransactions.fulfilled]: (state, action) => {
+			state.loading.transactions = false;
+			state.transactions = action.payload;
+		},
+		[getTransactions.rejected]: (state) => {
+			state.loading.transactions = false;
+		},
+		[getMeetings.pending]: (state) => {
+			state.loading.meetings = true;
+		},
+		[getMeetings.fulfilled]: (state, action) => {
+			state.loading.meetings = false;
+			state.meetings = action.payload;
+		},
+		[getMeetings.rejected]: (state) => {
+			state.loading.meetings = false;
+		},
+		[getNotes.pending]: (state) => {
+			state.loading.notes = true;
+		},
+		[getNotes.fulfilled]: (state, action) => {
+			state.loading.notes = false;
+			state.notes = action.payload;
+		},
+		[getNotes.rejected]: (state) => {
+			state.loading.notes = false;
 		},
 	},
 });

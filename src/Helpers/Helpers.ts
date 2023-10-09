@@ -1,4 +1,5 @@
 import { hash, compare } from "bcrypt";
+import { Response, Request } from "express";
 import { sign, verify, decode } from "jsonwebtoken";
 import { createTransport } from "nodemailer";
 import { join } from "path";
@@ -133,3 +134,15 @@ export const sendingMail = (options: object) => {
     .then(() => console.log("Message sent!!"))
     .catch((err) => console.log(err));
 };
+
+
+export function runMiddleware(req: Request, res: Response, fn:any) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result:any) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+      return resolve(result);
+    });
+  });
+}
