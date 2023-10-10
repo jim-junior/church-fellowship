@@ -2,12 +2,12 @@ import axios from "axios";
 
 
 //const HOST_URL = "https://schoolsoftapp-3432013afef6.herokuapp.com";
-//const HOST_URL = "https://reports.busiatrust.ac.ug";
+const HOST_URL = "http://localhost:3001";
 
-const HOST_URL = "https://fellow-ship-app.onrender.com";
+//const HOST_URL = "https://fellow-ship-app.onrender.com";
 
 
-export const UPLOADS_URL = HOST_URL + "/useruploads/";
+export const UPLOADS_URL = HOST_URL + "/useruploads";
 
 
 const axiosInstance = axios.create({

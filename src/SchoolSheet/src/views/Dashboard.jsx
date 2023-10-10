@@ -71,17 +71,17 @@ const Dashboard = () => {
 								<div key={mem.id} className="flex text-sm border-b border-gray1 cursor-pointer text-gray5 hover:bg-gray1">
 									<div className="p-2 w-1/4 flex">
 
-										<img src={mem.photo} className="h-10 w-10 object-cover rounded-full" />
-										<div className="ml-2">	{mem.fn} {mem.ln} </div>
+										<img src={mem.profile_picture} className="h-10 w-10 object-cover rounded-full" />
+										<div className="ml-2">	{mem.full_name}</div>
 									</div>
 									<div className="p-2 w-1/4">
-										{mem.emails}
+										{mem.email}
 									</div>
 									<div className="p-2 w-1/4">
-										{mem.contact}
+										{mem.phone_number}
 									</div>
 									<div className="p-2 w-1/4">
-										{mem.kids}
+										{mem.children}
 									</div>
 
 								</div>
