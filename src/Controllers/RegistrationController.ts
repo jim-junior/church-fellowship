@@ -52,6 +52,12 @@ export async function handleCreateNewRegistration(req: Request, res: Response) {
 export async function handleCreateUserFromRegistration(req: Request, res: Response) {
     try {
         const { registration_ref } = req.body;
+
+        if (!registration_ref) {
+            return res.json(customPayloadResponse(false, "Invalid payload")).status(400).end();
+        }
+
+
         const reg = await getRegistrationByRef(registration_ref);
 
         if (reg) {

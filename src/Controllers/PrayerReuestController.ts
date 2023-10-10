@@ -14,6 +14,10 @@ export async function handleGetPrayerRequests(req: Request, res: Response) {
 export async function handleCreatePrayerRequest(req: Request, res: Response) {
     try {
         const { request, user } = req.body;
+
+        if (!request) {
+            return res.json(customPayloadResponse(false, "Invalid payload")).status(400).end();
+        }
         const prayerRequest = await createPrayerRequest(request, user)
         return res.json(customPayloadResponse(true, prayerRequest)).status(200).end();
     } catch (error) {

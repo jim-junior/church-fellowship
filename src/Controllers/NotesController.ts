@@ -16,7 +16,6 @@ export const getNotesController = async (req: Request, res: Response) => {
 
 export const getUserNotesController = async (req: Request, res: Response) => {
     try {
-        console.log(req.user)
 
         const notes = await getUserNotes(req.user.id)
 

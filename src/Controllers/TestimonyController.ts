@@ -14,6 +14,12 @@ export async function handleGetTestimonies(req: Request, res: Response) {
 export async function handleCreateTestimony(req: Request, res: Response) {
     try {
         const { testimony, user } = req.body;
+
+        if (!testimony || !user) {
+            return res.json(customPayloadResponse(false, "Invalid payload")).status(400).end();
+        }
+
+
         const newTestimony = await createTestimony(user, testimony)
         return res.json(customPayloadResponse(true, newTestimony)).status(200).end();
     } catch (error) {

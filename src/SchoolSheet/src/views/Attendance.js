@@ -87,17 +87,14 @@ const Attendance = () => {
                     <div className="w-1/2">
                         <p className="text-primary font-medium text-lg">Members attended</p>
                         <div className="flex bg-gray1 text-primary font-semibold mt-5">
-                            <div className="p-2 w-1/4">
+                            <div className="p-2 w-1/3">
                                 Name
                             </div>
-                            <div className="p-2 w-1/4">
+                            <div className="p-2 w-1/3">
                                 Email
                             </div>
-                            <div className="p-2 w-1/4">
+                            <div className="p-2 w-1/3">
                                 Number
-                            </div>
-                            <div className="p-2 w-1/4">
-                                Checkin/out
                             </div>
                         </div>
 
@@ -105,17 +102,14 @@ const Attendance = () => {
                             participants.map((participant) => {
                                 return (
                                     <div className="flex hover:bg-gray1 border-b border-gray1 text-sm cursor-pointer text-gray5">
-                                        <div className="p-2 w-1/4">
-                                            Omeny Robert
+                                        <div className="p-2 w-1/3">
+                                            {participant.full_name}
                                         </div>
-                                        <div className="p-2 w-1/4">
-                                            rob@gmail.com
+                                        <div className="p-2 w-1/3">
+                                            {participant.email}
                                         </div>
-                                        <div className="p-2 w-1/4">
-                                            0758999454
-                                        </div>
-                                        <div className="p-2 w-1/4 text-secondary">
-                                            2:11 - 2:55
+                                        <div className="p-2 w-1/3">
+                                            {participant.phone_number}
                                         </div>
                                     </div>
                                 )
@@ -125,17 +119,14 @@ const Attendance = () => {
                     <div className="w-1/2 ml-5">
                         <p className="text-primary font-medium text-lg">Members Absent</p>
                         <div className="flex bg-gray1 text-primary font-semibold mt-5">
-                            <div className="p-2 w-1/4">
+                            <div className="p-2 w-1/3">
                                 Name
                             </div>
-                            <div className="p-2 w-1/4">
+                            <div className="p-2 w-1/3">
                                 Email
                             </div>
-                            <div className="p-2 w-1/4">
+                            <div className="p-2 w-1/3">
                                 Number
-                            </div>
-                            <div className="p-2 w-1/4">
-                                Checkin/out
                             </div>
 
                         </div>
@@ -144,17 +135,14 @@ const Attendance = () => {
                             absent.map((participant) => {
                                 return (
                                     <div className="flex hover:bg-gray1 border-b border-gray1 text-sm cursor-pointer text-gray5">
-                                        <div className="p-2 w-1/4">
-                                            Omeny Robert
+                                        <div className="p-2 w-1/3">
+                                            {participant.full_name}
                                         </div>
-                                        <div className="p-2 w-1/4">
-                                            rob@gmail.com
+                                        <div className="p-2 w-1/3">
+                                            {participant.email}
                                         </div>
-                                        <div className="p-2 w-1/4">
-                                            0758999454
-                                        </div>
-                                        <div className="py-2 pl-10 w-1/4 text-secondary">
-                                            X
+                                        <div className="p-2 w-1/3">
+                                            {participant.phone_number}
                                         </div>
                                     </div>
                                 )

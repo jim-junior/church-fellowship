@@ -11,6 +11,28 @@ export async function handleMobileMoneyTransaction(req: Request, res: Response) 
     try {
         const {userid, amount, transaction_type, phone_number, email, reason, network, device_id} = req.body
 
+        if (!userid) {
+            return res.json(customPayloadResponse(false, "Userid Required")).status(400).end();
+        }
+
+        if (!amount) {
+            return res.json(customPayloadResponse(false, "Amount Required")).status(400).end();
+        }
+
+        if (!transaction_type) {
+            return res.json(customPayloadResponse(false, "Transaction Type Required")).status(400).end();
+        }
+
+        if (!phone_number) {
+            return res.json(customPayloadResponse(false, "Phone Number Required")).status(400).end();
+        }
+
+        if (!reason) {
+            return res.json(customPayloadResponse(false, "Reason Required")).status(400).end();
+        }
+
+
+
         const transaction = await createMMTransaction(
             userid,
             parseInt(amount),

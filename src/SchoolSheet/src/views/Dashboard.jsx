@@ -27,10 +27,27 @@ const Dashboard = () => {
 		dispatch(getMeetings())
 	}, [])
 
+
+
+
+
 	useEffect(() => {
+		const notPresent = [];
+		const meeting = meetings[0]
+		members.forEach((member) => {
+			// check if member in meeting.participants
+			const isPresent = meeting.participants.find((participant) => {
+				return participant.id === member.id
+			})
+			if (isPresent) {
+				//present.push(member);
+			} else {
+				notPresent.push(member);
+			}
+		});
 
+		setAbsent(notPresent);
 	}, [meetings])
-
 
 
 
@@ -66,7 +83,7 @@ const Dashboard = () => {
 
 						</div>
 
-						{members.map((mem) => {
+						{absent.map((mem) => {
 							return (
 								<div key={mem.id} className="flex text-sm border-b border-gray1 cursor-pointer text-gray5 hover:bg-gray1">
 									<div className="p-2 w-1/4 flex">

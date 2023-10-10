@@ -15,6 +15,28 @@ export async function handleGetNews(req: Request, res: Response) {
 export async function handleCreateNews(req: Request, res: Response) {
     try {
         const { title, subTitle, description, date, venue } = req.body;
+
+        if (!title) {
+            return res.json(customPayloadResponse(false, "Tile is required")).status(400).end();
+        }
+
+        if (!subTitle) {
+            return res.json(customPayloadResponse(false, "Sub Title is required")).status(400).end();
+        }
+
+        if (!description) {
+            return res.json(customPayloadResponse(false, "Description is required")).status(400).end();
+        }
+
+        if (!date) {
+            return res.json(customPayloadResponse(false, "Date is required")).status(400).end();
+        }
+
+        if (!venue) {
+            return res.json(customPayloadResponse(false, "Venue is required")).status(400).end();
+        }
+
+
         if (!req.file) return res.json(customPayloadResponse(false, "Image is required")).status(200).end()
 
         const b64 = Buffer.from(req.file.buffer).toString("base64");
