@@ -34,19 +34,22 @@ const Dashboard = () => {
 	useEffect(() => {
 		const notPresent = [];
 		const meeting = meetings[0]
-		members.forEach((member) => {
-			// check if member in meeting.participants
-			const isPresent = meeting.participants.find((participant) => {
-				return participant.id === member.id
-			})
-			if (isPresent) {
-				//present.push(member);
-			} else {
-				notPresent.push(member);
-			}
-		});
+		if (meeting) {
+			members.forEach((member) => {
+				// check if member in meeting.participants
+				const isPresent = meeting?.participants?.find((participant) => {
+					return participant.id === member.id
+				})
+				if (isPresent) {
+					//present.push(member);
+				} else {
+					notPresent.push(member);
+				}
+			});
 
-		setAbsent(notPresent);
+			setAbsent(notPresent);
+		}
+
 	}, [meetings])
 
 
@@ -88,7 +91,7 @@ const Dashboard = () => {
 								<div key={mem.id} className="flex text-sm border-b border-gray1 cursor-pointer text-gray5 hover:bg-gray1">
 									<div className="p-2 w-1/4 flex">
 
-										<img src={mem.profile_picture} className="h-10 w-10 object-cover rounded-full" />
+										<img src={mem.profile_picture} alt={mem.full_name} className="h-10 w-10 object-cover rounded-full" />
 										<div className="ml-2">	{mem.full_name}</div>
 									</div>
 									<div className="p-2 w-1/4">
