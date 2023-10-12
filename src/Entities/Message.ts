@@ -154,30 +154,39 @@ export const getChatUsers = async (userId: number) => {
   const users = await User.createQueryBuilder("user")
     .leftJoinAndSelect("user.sent_messages", "sent_messages")
     .leftJoinAndSelect("user.recieved_messages", "recieved_messages")
-    .where("sent_messages.reciever = :id", {
-      id: user.id
+    .where("sent_messages.reciever = :id AND sent_messages.type = :type", {
+      id: user.id,
+      type: "userchat"
     })
-    .orWhere("recieved_messages.sender = :id", {
-      id: user.id
+    .orWhere("recieved_messages.sender = :id  AND sent_messages.type = :type", {
+      id: user.id,
+      type: "userchat"
     })
     .getMany();
 
   const chatUsers = users.map((user) => {
-    let latestMessage = null;
+    let latestRecievedMessage = null;
+    let lastMessage : Message | null = null
     let unreadMessages = 0;
-    if (user.sent_messages.length > 0) {
-      latestMessage = user.sent_messages[0];
-      unreadMessages = user.sent_messages.filter((message) => message.unread).length;
-    } else if (user.recieved_messages.length > 0) {
-      latestMessage = user.recieved_messages[0];
+    if (user.recieved_messages.length > 0) {
+      latestRecievedMessage = user.recieved_messages.reverse()[0];
       unreadMessages = user.recieved_messages.filter((message) => message.unread).length;
+    }
+    const lastSentMessage = user.sent_messages.length > 0 ? user.sent_messages.reverse()[0] : null;
+
+    if (latestRecievedMessage && lastSentMessage) {
+      if (latestRecievedMessage.created_at > lastSentMessage.created_at) {
+        lastMessage = latestRecievedMessage;
+      } else {
+        lastMessage = lastSentMessage;
+      }
     }
     return {
       id: user.id,
       full_name: user.full_name,
       email: user.email,
       profile_picture: user.profile_picture,
-      latestMessage,
+      latestMessage:lastMessage,
       unreadMessages
     }
   });
