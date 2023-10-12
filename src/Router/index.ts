@@ -8,6 +8,7 @@ import NewsRouter from "./NewsRouter";
 import TransactionRoutes from "./TransactionRoutes";
 import MeetingRoutes from "./MeetingRoutes";
 import NotesRoutes from "./NotesRoutes";
+import StaffRoutes from "./StaffRoutes";
 
 const router = Router();
 
@@ -21,5 +22,6 @@ export default (): Router => {
   TransactionRoutes(router)
   MeetingRoutes(router)
   NotesRoutes(router)
+  StaffRoutes(router)
   return router;
 };

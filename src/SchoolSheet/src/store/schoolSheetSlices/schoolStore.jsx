@@ -64,6 +64,13 @@ export const getNotes = createAsyncThunk("/fellowship/notes", async () => {
 	if (status) return payload;
 });
 
+export const getStaff = createAsyncThunk("/fellowship/staff", async () => {
+	const resp = await axiosInstance.get("/staff/all");
+	const { data } = resp;
+	const { status, payload } = data;
+	if (status) return payload;
+});
+
 
 export const MothersFellowShipSlices = createSlice({
 	name: "FellowShipSlices",
@@ -77,6 +84,7 @@ export const MothersFellowShipSlices = createSlice({
 		transactions: [],
 		meetings: [],
 		notes: [],
+		staff: [],
 		loading: {
 			streams: false,
 			registrations: false,
@@ -87,6 +95,7 @@ export const MothersFellowShipSlices = createSlice({
 			transactions: false,
 			meetings: false,
 			notes: false,
+			staff: false,
 		},
 	},
 	extraReducers: {
@@ -179,6 +188,16 @@ export const MothersFellowShipSlices = createSlice({
 		},
 		[getNotes.rejected]: (state) => {
 			state.loading.notes = false;
+		},
+		[getStaff.pending]: (state) => {
+			state.loading.staff = true;
+		},
+		[getStaff.fulfilled]: (state, action) => {
+			state.loading.staff = false;
+			state.staff = action.payload;
+		},
+		[getStaff.rejected]: (state) => {
+			state.loading.staff = false;
 		},
 	},
 });

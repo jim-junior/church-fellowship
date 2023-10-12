@@ -15,12 +15,15 @@ import NewMembers from '../../components/members/NewMembers'
 import AbsentMembers from '../../components/members/AbsentMembers'
 import axiosInstance from '../../axios-instance'
 import { useDispatch, useSelector } from "react-redux"
-import { getRegistrations, getMembers } from '../../store/schoolSheetSlices/schoolStore'
+import { getRegistrations, getMembers, getStaff } from '../../store/schoolSheetSlices/schoolStore'
+import { useFeedback } from '../../hooks/feedback'
+
 
 
 const Members = () => {
   const dispatch = useDispatch()
-  const { registrations, members } = useSelector((state) => state.fellowShipStore)
+  const { registrations, members, staff } = useSelector((state) => state.fellowShipStore)
+  const { toggleFeedback } = useFeedback()
 
   const [all, setAll] = useState(true);
   const [newm, setNew] = useState(false);
@@ -30,6 +33,7 @@ const Members = () => {
   useEffect(() => {
     dispatch(getMembers())
     dispatch(getRegistrations())
+    dispatch(getStaff())
   }, [dispatch])
 
 
@@ -62,6 +66,9 @@ const Members = () => {
   }
 
 
+
+
+
   return (
     <div className=" mt-2 w-full bg-white rounded-md shadow">
 
@@ -91,8 +98,8 @@ const Members = () => {
           <div className="flex w-5/12 mt-5">
             <div className="" onClick={showAll}> {all ? <Button value={"All"} /> : <ButtonAlt value={"All"} />}  </div>
             <div className="ml-5" onClick={showNew}> {newm ? <Button value={"New"} /> : <ButtonAlt value={"New"} />} </div>
-            <div className="ml-5" onClick={showAbsent}> {absent ? <Button value={"Abscent"} /> : <ButtonAlt value={"Abscent"} />} </div>
-            <div className="ml-5" onClick={showMost}> {most ? <Button value={"Most Abscent"} /> : <ButtonAlt value={"Most Abscent"} />} </div>
+            <div className="ml-5" onClick={showAbsent}> {absent ? <Button value={"Staff Accounts"} /> : <ButtonAlt value={"Staff Accounts"} />} </div>
+            {/* <div className="ml-5" onClick={showMost}> {most ? <Button value={"Most Abscent"} /> : <ButtonAlt value={"Most Abscent"} />} </div> */}
             {/* <ButtonAlt value={"All Members"} /> */}
           </div>
 
@@ -101,7 +108,7 @@ const Members = () => {
           {all ? <MembersTable memberData={members} /> : null}
           {most ? <MostAbsent memberData={testMemberData} /> : null}
           {newm ? <NewMembers memberData={registrations} /> : null}
-          {absent ? <AbsentMembers memberData={testMemberData} /> : null}
+          {absent ? <AbsentMembers staff={staff} /> : null}
         </div>
       </div>
     </div>

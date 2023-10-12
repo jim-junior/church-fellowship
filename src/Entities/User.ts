@@ -18,6 +18,8 @@ import { Testimony } from "./Testimony";
 import { Meeting } from "./Meeting";
 import { Message } from "./Message";
 import { Note } from "./Notes";
+import { Staff } from "./Staff";
+
 
 
 @Entity()
@@ -82,6 +84,12 @@ export class User extends BaseEntity {
     })
     reset_token: string;
 
+    @OneToOne(() => Staff, staff => staff.userAccount, {
+        nullable: true,
+        eager: true
+    })
+    @JoinColumn()
+    staffAccount: Staff;
 
 
 }
@@ -205,3 +213,4 @@ export const updatePassword = async (email: string, password: string) => {
 
     return user;
 }
+

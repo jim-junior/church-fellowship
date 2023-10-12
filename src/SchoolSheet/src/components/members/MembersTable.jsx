@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../assets/styles/main.css'
 import { MdDeleteOutline } from 'react-icons/md'
 import { BsPencilSquare, BsEye } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import Button from '../Button'
+import axiosInstance from '../../axios-instance'
+import { useFeedback } from '../../hooks/feedback'
+import { useDispatch } from 'react-redux'
+import { getMembers } from '../../store/schoolSheetSlices/schoolStore'
 
 const MembersTable = (props) => {
   const {
-    memberData,
-    deleteMemberInfo,
+    memberData
   } = props
 
   return (
@@ -29,6 +32,7 @@ const MembersTable = (props) => {
             <th className="p-2 text-primary text-sm text-left">email</th>
             <th className="p-2 text-primary text-sm text-left">Children</th>
             <th className="p-2 text-primary text-sm text-left">Recommended By</th>
+            <th className="p-2 text-primary text-sm text-left">Action</th>
           </thead>
           <tbody>
             {memberData?.map((member) => {
@@ -47,7 +51,41 @@ export default MembersTable
 
 
 function Memeber({ member }) {
-  //const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const { toggleFeedback } = useFeedback()
+  const dispatch = useDispatch()
+
+
+
+  async function createStaffAccoutForUser() {
+    try {
+      setLoading(true)
+      const response = await axiosInstance.post(`/staff/create-account`, {
+        userId: member.id
+      })
+      const { status, payload } = response.data
+      if (status) {
+        dispatch(getMembers())
+        setLoading(false)
+        toggleFeedback("success", {
+          title: "Success",
+          text: "Staff account created successfully"
+        })
+      } else {
+        setLoading(false)
+        toggleFeedback("error", {
+          title: "Error",
+          text: payload
+        })
+      }
+    } catch (error) {
+      setLoading(false)
+      toggleFeedback("error", {
+        title: "Error",
+        text: "Something went wrong while creating staff account"
+      })
+    }
+  }
 
 
 
@@ -80,6 +118,20 @@ function Memeber({ member }) {
       </td>
       <td className="text-xs p-3 text-gray5">
         {member.ref}
+      </td>
+      <td className="text-xs p-3 text-gray5">
+        {
+          member.staffAccount ? (
+            <p className='p-2 rounded-md bg-green text-white'>
+              STAFF ACCOUNT
+            </p>
+          ) :
+            loading ? <div className='loader2'></div> : (
+              <p onClick={createStaffAccoutForUser} className='p-2 rounded-md bg-secondary text-white'>
+                CHANGE INTO STAFF
+              </p>
+            )
+        }
       </td>
 
     </tr>
