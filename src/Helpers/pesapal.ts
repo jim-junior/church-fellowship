@@ -31,13 +31,12 @@ export async function charge_mobile_money(
     currency: string = "UGX"
 ) {
   const {token}= await getAuthToken()
-
   const payload = {
     "id": tx_ref,
     "currency": currency,
     "amount": amount,
     "description": reason,
-    "callback_url": "https://fellow-ship-app.onrender.com/transaction/pesapal/verify",
+    "callback_url": "http://192.168.43.1:3000/transaction/pesapal/verify",
     "notification_id": process.env.PESAPAL_NOTIFICATION_ID,
     "billing_address": {
         "email_address": email,
