@@ -127,6 +127,14 @@ export const getMessagesBtnUsers = async (senderId: number, recieverId: number) 
     .take(50)
     .getMany();
 
+    // set all messages to read
+    messages.forEach(async (message) => {
+      if (message.unread) {
+        message.unread = false;
+        await message.save();
+      }
+    });
+
 
   return messages;
 }
