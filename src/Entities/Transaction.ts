@@ -33,7 +33,9 @@ export class Transaction extends BaseEntity {
     @Column()
     transaction_type: string;
 
-    @Column()
+    @Column({
+        default: "pending"
+    })
     status: string;
 
     @Column()
