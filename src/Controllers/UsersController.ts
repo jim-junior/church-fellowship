@@ -19,7 +19,7 @@ export async function handleGetAllUsers(req: Request, res: Response) {
 
 export const handleLogin = async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, expoPushToken } = req.body;
 
     if (!email) {
       return res
@@ -50,6 +50,11 @@ export const handleLogin = async (req: Request, res: Response) => {
             .status(200)
             .end();
     } else {
+      if (expoPushToken) {
+        user.device_token = expoPushToken;
+        await user.save();
+      }
+
       const userWithPass = await getUserPassword(email) as User
       const validatedPassword = await validatePassword(password, userWithPass.password);
 

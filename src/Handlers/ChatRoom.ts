@@ -1,11 +1,14 @@
 import { Server, Socket } from "socket.io";
 import { getChatRoomMessages, createMessage, getMessagesBtnUsers, markMessagesAsRead, getMessageById } from "../Entities/Message";
+import { push_expo_notification } from "../Helpers/mobile";
+import { getUserById } from "../Entities/User";
 
 type Msg = {
   content: string;
   type: string;
   senderId: number;
   recieverId?: number;
+  token: string;
 }
 
 export function handleChatRoom(io: Server, socket: Socket) {
@@ -42,6 +45,11 @@ export function handleUserChat(io: Server, socket: Socket) {
   socket.on("userchat:message", async (msg: Msg) => {
     const message = await createMessage(msg.content, msg.type, msg.senderId, msg.recieverId);
     io.to(`userchat:${msg.senderId}:${msg.recieverId}`).emit("userchat:message", message);
+    if (msg.recieverId) {
+      const reciever = await getUserById(msg.recieverId);
+      if (!reciever) return;
+      await push_expo_notification(reciever.device_token, msg.content, "New Message")
+    }
   })
 
   socket.on("message:read", async (msgId) => {

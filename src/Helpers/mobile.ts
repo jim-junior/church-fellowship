@@ -7,7 +7,8 @@ export async function push_expo_notification(
     title: string = "Mothers Online FellowShip",
     data = {}
 ) {
-    const url = "https://exp.host/--/api/v2/push/send"
+    try {
+        const url = "https://exp.host/--/api/v2/push/send"
 
     const payload = {
         to: token,
@@ -19,5 +20,9 @@ export async function push_expo_notification(
     const res = await axios.post(url, payload)
 
     return res.data
+    } catch (error) {
+        
+    }
+    
 
 }

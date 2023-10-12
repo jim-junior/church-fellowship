@@ -91,6 +91,12 @@ export class User extends BaseEntity {
     @JoinColumn()
     staffAccount: Staff;
 
+    @Column({
+        nullable: true,
+        default: ""
+    })
+    device_token: string;
+
 
 }
 
