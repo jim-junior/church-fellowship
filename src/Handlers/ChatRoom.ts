@@ -1,5 +1,5 @@
 import { Server, Socket } from "socket.io";
-import { getChatRoomMessages, createMessage, getMessagesBtnUsers, markMessagesAsRead } from "../Entities/Message";
+import { getChatRoomMessages, createMessage, getMessagesBtnUsers, markMessagesAsRead, getMessageById } from "../Entities/Message";
 
 type Msg = {
   content: string;
@@ -46,6 +46,12 @@ export function handleUserChat(io: Server, socket: Socket) {
 
   socket.on("message:read", async (msgId) => {
     await markMessagesAsRead(msgId);
+    const msg = await getMessageById( msgId);
+
+    if (msg) {
+      const latestMessages = await getMessagesBtnUsers(msg.sender.id, msg.reciever.id);
+      io.to(`userchat:${msg.sender.id}:${msg.reciever.id}`).emit("userchat:latestMessages", latestMessages);
+    }
   })
 
 

@@ -201,3 +201,15 @@ export const markMessagesAsRead = async (messageId: number) => {
 
   return message;
 }
+
+
+export const getMessageById = async (id: number) => {
+  const message = await Message.findOne({
+    where: {
+      id
+    }
+  });
+
+
+  return message;
+}
