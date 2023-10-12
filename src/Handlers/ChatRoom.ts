@@ -38,6 +38,7 @@ export function handleUserChat(io: Server, socket: Socket) {
 
   })
 
+
   socket.on("userchat:message", async (msg: Msg) => {
     const message = await createMessage(msg.content, msg.type, msg.senderId, msg.recieverId);
     io.to(`userchat:${msg.senderId}:${msg.recieverId}`).emit("userchat:message", message);

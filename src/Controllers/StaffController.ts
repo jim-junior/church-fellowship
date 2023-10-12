@@ -4,6 +4,7 @@ import {
   createStaffAccoutForUser,
   createStaff,
   getAllStaff,
+  createStaffAccount,
 } from "../Entities/Staff"
 
 
@@ -58,7 +59,16 @@ export const handleCreateStaff = async (req: Request, res: Response) => {
       return res.json(customPayloadResponse(false, "Internal Error")).status(400).end();
     }
 
-    const staff = await createStaff(firstName, middleName, lastName, email, hashedPassword);
+    const staff = await createStaffAccount(
+      firstName,
+      middleName,
+      lastName,
+      email,
+      hashedPassword,
+      phoneNumber,
+      isMother,
+      children,
+    );
 
     return res.json(customPayloadResponse(true, staff)).status(200).end();
     

@@ -141,7 +141,7 @@ export const getUserByEmail = async (email: string) => {
 }
 
 export const getUserPassword = async (email: string) => {
-  return await User.findOne({ where: { email: email }, select: ["password"] });
+  return await User.findOne({ where: { email: email }, select: ["id", "password"] });
 }
 
 export const updateProfilePicture = async (id: number, profile_picture: string) => {
