@@ -52,8 +52,11 @@ export function handleUserChat(io: Server, socket: Socket) {
     }
   })
 
-  socket.on("message:read", async (msgId) => {
-    console.log("Reading from socket")
+  socket.on("message:read", async ({
+                    msgId,
+                    user,
+                    username
+                }) => {
     await markMessagesAsRead(msgId);
     const msg = await getMessageById( msgId);
 

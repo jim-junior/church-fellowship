@@ -70,6 +70,7 @@ export const createMessage = async (content: string, type: string, senderId: num
     throw new Error("Sender not found");
   }
 
+
   const message = new Message();
   message.content = content;
   message.type = type;
@@ -129,7 +130,7 @@ export const getMessagesBtnUsers = async (senderId: number, recieverId: number) 
 
     // set all messages to read
     messages.forEach(async (message) => {
-      if (message.unread) {
+      if (message.unread && message.reciever.id === sender.id) {
         message.unread = false;
         await message.save();
       }
@@ -144,7 +145,8 @@ export const getChatUsers = async (userId: number) => {
   const user = await User.findOne({
     where: {
       id: userId
-    }
+    },
+    relations: ["sent_messages", "recieved_messages"]
   });
 
   if (!user) {
@@ -165,14 +167,18 @@ export const getChatUsers = async (userId: number) => {
     .getMany();
 
   const chatUsers = users.map((user) => {
+    console.log("USER", user.full_name)
     let latestRecievedMessage = null;
     let lastMessage : Message | null = null
     let unreadMessages = 0;
     if (user.recieved_messages.length > 0) {
       latestRecievedMessage = user.recieved_messages.reverse()[0];
-      console.log(latestRecievedMessage)
-      unreadMessages = user.recieved_messages.filter((message) => message.unread).length;
+      //unreadMessages = user.recieved_messages.filter((message) => message.unread).length;
     }
+    if (user.sent_messages.length > 0) {
+      unreadMessages = user.sent_messages.filter((message) => message.unread).length;
+    }
+      
     const lastSentMessage = user.sent_messages.length > 0 ? user.sent_messages.reverse()[0] : null;
 
     if (latestRecievedMessage && lastSentMessage) {
@@ -181,6 +187,10 @@ export const getChatUsers = async (userId: number) => {
       } else {
         lastMessage = lastSentMessage;
       }
+    } else if (latestRecievedMessage) {
+      lastMessage = latestRecievedMessage;
+    } else if (lastSentMessage) {
+      lastMessage = lastSentMessage;
     }
     return {
       id: user.id,
