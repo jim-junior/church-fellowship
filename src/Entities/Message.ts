@@ -90,7 +90,7 @@ export const getChatRoomMessages = async () => {
     order: {
       created_at: "DESC"
     },
-    take: 50
+    take: 75
   });
   return messages;
 }
@@ -125,7 +125,7 @@ export const getMessagesBtnUsers = async (senderId: number, recieverId: number) 
       reciever: reciever.id
     })
     .orderBy("message.created_at", "DESC")
-    .take(50)
+    .take(75)
     .getMany();
 
     // set all messages to read
@@ -167,7 +167,6 @@ export const getChatUsers = async (userId: number) => {
     .getMany();
 
   const chatUsers = users.map((user) => {
-    console.log("USER", user.full_name)
     let latestRecievedMessage = null;
     let lastMessage : Message | null = null
     let unreadMessages = 0;
@@ -218,9 +217,6 @@ export const markMessagesAsRead = async (messageId: number) => {
 
   message.unread = false;
   await message.save();
-  console.log("====================================");
-  console.log("Marked:  ",message.content);
-  console.log("====================================");
 
   return message;
 }

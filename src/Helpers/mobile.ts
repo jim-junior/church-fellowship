@@ -18,10 +18,11 @@ export async function push_expo_notification(
     }
 
     const res = await axios.post(url, payload)
+    console.log(res.data)
 
     return res.data
     } catch (error) {
-        
+        console.log(error)
     }
     
 
