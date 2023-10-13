@@ -118,7 +118,12 @@ export const addParticipant = async (meetingId: number, userId: number) => {
     throw new Error("Meeting not found");
   }
 
-  meeting.participants = [ user];
+  const participants = meeting.participants;
+
+  meeting.participants = [ 
+    ...participants,
+    user
+  ];
   
 
 
