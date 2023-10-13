@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Expo } from 'expo-server-sdk';
 
 
 export async function push_expo_notification(
@@ -12,15 +13,19 @@ export async function push_expo_notification(
 
     const payload = {
         to: token,
-        title,
         body: message,
-        data
+        data,
     }
 
-    const res = await axios.post(url, payload)
-    console.log(res.data)
+    let expo = new Expo();
 
-    return res.data
+    let res = await expo.sendPushNotificationsAsync([payload])
+
+    /* const res = await axios.post(url, payload)
+    console.log(res.data) */
+    console.log(res)
+
+    return res
     } catch (error) {
         console.log(error)
     }

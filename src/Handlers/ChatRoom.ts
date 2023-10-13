@@ -24,6 +24,11 @@ export function handleChatRoom(io: Server, socket: Socket) {
     
   });
 
+  socket.on("chatroom:moreMessages", async (page: number) => {
+    const messages = await getChatRoomMessages(page);
+    socket.emit("chatroom:latestMessages", messages);
+  })
+
 }
 
 
@@ -64,6 +69,16 @@ export function handleUserChat(io: Server, socket: Socket) {
       const latestMessages = await getMessagesBtnUsers(msg.sender.id, msg.reciever.id);
       io.to(`userchat:${msg.sender.id}:${msg.reciever.id}`).emit("userchat:latestMessages", latestMessages);
     }
+  })
+  
+
+  socket.on("userchat:moreMessages", async ({
+    senderId,
+    recieverId,
+    page
+  }) => {
+    const messages = await getMessagesBtnUsers(senderId, recieverId, page);
+    socket.emit("userchat:latestMessages", messages);
   })
 
 

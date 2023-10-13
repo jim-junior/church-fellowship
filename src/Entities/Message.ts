@@ -82,7 +82,7 @@ export const createMessage = async (content: string, type: string, senderId: num
   return message;
 }
 
-export const getChatRoomMessages = async () => {
+export const getChatRoomMessages = async (page = 1) => {
   const messages = await Message.find({
     where: {
       type: "chatroom"
@@ -90,12 +90,12 @@ export const getChatRoomMessages = async () => {
     order: {
       created_at: "DESC"
     },
-    take: 75
+    take: 10 * page
   });
   return messages;
 }
 
-export const getMessagesBtnUsers = async (senderId: number, recieverId: number) => {
+export const getMessagesBtnUsers = async (senderId: number, recieverId: number, page = 1) => {
   const sender = await User.findOne({
     where: {
       id: senderId
@@ -125,7 +125,7 @@ export const getMessagesBtnUsers = async (senderId: number, recieverId: number) 
       reciever: reciever.id
     })
     .orderBy("message.created_at", "DESC")
-    .take(75)
+    .take(10 * page)
     .getMany();
 
     // set all messages to read

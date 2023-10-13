@@ -56,12 +56,12 @@ const Attendance = () => {
                 </div>
                 <div className="flex mt-5">
                     {meetings.map((meet) => {
-                        if (
+                        /* if (
                             new Date(meet.start_time).getTime() >
                             new Date().getTime()
                         ) {
                             return null;
-                        }
+                        } */
                         return (
                             <div
                                 className={
