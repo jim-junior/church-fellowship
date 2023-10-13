@@ -158,7 +158,7 @@ export const getChatUsers = async (userId: number) => {
       id: user.id,
       type: "userchat"
     })
-    .orWhere("recieved_messages.sender = :id  AND sent_messages.type = :type", {
+    .orWhere("recieved_messages.sender = :id  AND recieved_messages.type = :type", {
       id: user.id,
       type: "userchat"
     })
@@ -170,6 +170,7 @@ export const getChatUsers = async (userId: number) => {
     let unreadMessages = 0;
     if (user.recieved_messages.length > 0) {
       latestRecievedMessage = user.recieved_messages.reverse()[0];
+      console.log(latestRecievedMessage)
       unreadMessages = user.recieved_messages.filter((message) => message.unread).length;
     }
     const lastSentMessage = user.sent_messages.length > 0 ? user.sent_messages.reverse()[0] : null;
@@ -207,6 +208,9 @@ export const markMessagesAsRead = async (messageId: number) => {
 
   message.unread = false;
   await message.save();
+  console.log("====================================");
+  console.log("Marked:  ",message.content);
+  console.log("====================================");
 
   return message;
 }
