@@ -232,3 +232,14 @@ export const getMessageById = async (id: number) => {
 
   return message;
 }
+
+export const getLatestChatRoomMessage = async () => {
+  return await Message.findOne({
+    where: {
+      type: "chatroom"
+    },
+    order: {
+      created_at: "DESC"
+    }
+  });
+}

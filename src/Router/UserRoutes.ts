@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { handleGetAllUsers, handleLogin, handleGetAuthUser, handleGetChatUsers, handleUpdateProfilePicture, handleGetToken, handleUpdatePassword } from "../Controllers/UsersController";
+import { handleGetAllUsers, handleLogin, handleGetAuthUser, handleGetChatUsers, handleUpdateProfilePicture, handleGetToken, handleUpdatePassword, handleGetLatestChatRoomMessage } from "../Controllers/UsersController";
 import { JWTAuthMiddleWare } from "../Middlewares/AuthMiddleware";
 import multer from "multer";
 
@@ -18,4 +18,5 @@ export default (router: Router) => {
   router.post(`${usersPrefix}/profilepicture`, profilePictureUpload, JWTAuthMiddleWare, handleUpdateProfilePicture)
   router.post(`${usersPrefix}/token`, handleGetToken)
   router.post(`${usersPrefix}/update-password`, handleUpdatePassword)
+  router.get(`${usersPrefix}/latest-chat-room-message`, JWTAuthMiddleWare, handleGetLatestChatRoomMessage)
 };

@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 import { customPayloadResponse, getAuthAccessToken, sendingMail, validatePassword } from "../Helpers/Helpers"
 import { User, getAllUsers, getUserByEmail, getUserPassword, getUserById, updateProfilePicture, updatePassword, updateResetToken, getRessetToken } from "../Entities/User";
 import { getRegistrationByEmail } from "../Entities/Registration";
-import {getChatUsers} from "../Entities/Message"
+import {getChatUsers, getLatestChatRoomMessage} from "../Entities/Message"
 import { handleUpload } from "../Helpers/cloudinary";
 
 
@@ -188,6 +188,17 @@ export const handleGetToken = async (req: Request, res: Response) => {
 
     return res.json(customPayloadResponse(true, "Sent email")).status(200).end();
 
+  } catch (error) {
+    console.log(error);
+    return res.json(customPayloadResponse(false, "Error occured")).status(200).end();
+  }
+}
+
+
+export const handleGetLatestChatRoomMessage = async (req: Request, res: Response) => {
+  try {
+    const message = await getLatestChatRoomMessage()
+    return res.json(customPayloadResponse(true, message)).status(200).end();
   } catch (error) {
     console.log(error);
     return res.json(customPayloadResponse(false, "Error occured")).status(200).end();
