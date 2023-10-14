@@ -4,7 +4,7 @@ import axios from "axios";
 //const HOST_URL = "https://schoolsoftapp-3432013afef6.herokuapp.com";
 //const HOST_URL = "http://192.168.43.1:3001";
 
-const HOST_URL = "https://fellow-ship-app.onrender.com";
+const HOST_URL = "https://fellowship-41b7b8c7191e.herokuapp.com";
 
 
 export const UPLOADS_URL = HOST_URL + "/useruploads";
