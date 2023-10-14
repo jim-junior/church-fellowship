@@ -121,8 +121,14 @@ export const createUser = async (
     return createUser;
 }
 
-export const getAllUsers = async () => {
-    const allUsers = await User.find();
+export const getAllUsers = async (
+    page: number = 1,
+) => {
+    const allUsers = await User.find(
+        {
+            take: 10 * page,
+        }
+    );
     return allUsers;
 }
 

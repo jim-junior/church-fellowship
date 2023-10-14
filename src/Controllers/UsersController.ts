@@ -10,7 +10,12 @@ import { handleUpload } from "../Helpers/cloudinary";
 
 export async function handleGetAllUsers(req: Request, res: Response) {
     try {
-        const users = await getAllUsers()
+      const  {page = 1} = req.query
+      const parsedPage = parseInt(page as string)
+      if (parsedPage < 1) {
+        return res.json(customPayloadResponse(false, "Page must be greater than 0")).status(200).end();
+      }
+        const users = await getAllUsers(parsedPage)
         return res.json(customPayloadResponse(true, users)).status(200).end();
     } catch (error) {
         return res.json(customPayloadResponse(false, "Error occured")).status(500).end();

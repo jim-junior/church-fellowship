@@ -90,7 +90,7 @@ export const getChatRoomMessages = async (page = 1) => {
     order: {
       created_at: "DESC"
     },
-    take: 10 * page
+    take: 30 * page
   });
   return messages;
 }
@@ -125,7 +125,7 @@ export const getMessagesBtnUsers = async (senderId: number, recieverId: number, 
       reciever: reciever.id
     })
     .orderBy("message.created_at", "DESC")
-    .take(10 * page)
+    .take(30 * page)
     .getMany();
 
     // set all messages to read
