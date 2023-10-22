@@ -175,7 +175,9 @@ export const getChatUsers = async (userId: number) => {
       //unreadMessages = user.recieved_messages.filter((message) => message.unread).length;
     }
     if (user.sent_messages.length > 0) {
-      unreadMessages = user.sent_messages.filter((message) => message.unread).length;
+      unreadMessages = user.sent_messages.filter((message) => {
+        return message.unread && message?.reciever?.id === userId
+      }).length;
     }
       
     const lastSentMessage = user.sent_messages.length > 0 ? user.sent_messages.reverse()[0] : null;
