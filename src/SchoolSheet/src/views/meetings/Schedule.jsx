@@ -102,7 +102,7 @@ function SheduleMeetingFormModal({ open, onClose }) {
   const [description, setDescription] = useState('')
   const [startDateTIme, setStartDateTIme] = useState('')
   const [endDateTIme, setEndDateTIme] = useState('')
-  const [meetingLink, setMeetingLink] = useState('')
+  const [meetingLink, setMeetingLink] = useState('https://us05web.zoom.us/j/82866576528?pwd=SnlzdE5wVjRENk52V29mMmlZdW5UQT09')
   const [loading, setLoading] = useState(false)
   const { toggleFeedback } = useFeedback()
   const dispatch = useDispatch()
@@ -186,9 +186,13 @@ function SheduleMeetingFormModal({ open, onClose }) {
               placeholder="Start Date Time"
               name="startDateTIme"
               value={startDateTIme}
-              onChange={(e) => setStartDateTIme(e.target.value)}
+              onChange={(e) => {
+                setStartDateTIme(e.target.value)
+                setEndDateTIme(e.target.value)
+              }}
             />
           </div>
+          {/* 
           <div className="mb-4">
             <InputField
               type="datetime-local"
@@ -206,7 +210,7 @@ function SheduleMeetingFormModal({ open, onClose }) {
               value={meetingLink}
               onChange={(e) => setMeetingLink(e.target.value)}
             />
-          </div>
+          </div> */}
           <div className="flex justify-end">
             {
               loading ? <div className="loader w-6 h-6"></div> : <Button onClick={handleSubmit} value="Schedule" />

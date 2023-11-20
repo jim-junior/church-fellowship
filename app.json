@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "d42d15ec-e394-427a-abda-eeeebf539897"
+      }
+    },
+    "android": {
+      "package": "com.fellowship.app"
+    }
+  }
+}
