@@ -1,7 +1,7 @@
 require("dotenv").config();
 import axios from "axios";
 
-const PESAPAL_API = "https://cybqa.pesapal.com/pesapalv3"
+const PESAPAL_API = "https://pay.pesapal.com/v3"
 
 async function getAuthToken() {
     const payload = {
