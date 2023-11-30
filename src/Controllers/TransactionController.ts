@@ -55,6 +55,7 @@ export async function handleMobileMoneyTransaction(req: Request, res: Response) 
 
         transaction.order_id = fw_res.order_tracking_id
         await transaction.save()
+        console.log(fw_res)
 
 
         return res.json(customPayloadResponse(true, fw_res)).status(200).end();

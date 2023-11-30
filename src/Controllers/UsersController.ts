@@ -1,7 +1,7 @@
 require("dotenv").config();
 import crypto from "crypto";
 import { Request, Response } from "express";
-import { customPayloadResponse, getAuthAccessToken, sendingMail, validatePassword } from "../Helpers/Helpers"
+import { customPayloadResponse, getAuthAccessToken, hashPassword, sendingMail, validatePassword } from "../Helpers/Helpers"
 import { User, getAllUsers, getUserByEmail, getUserPassword, getUserById, updateProfilePicture, updatePassword, updateResetToken, getRessetToken } from "../Entities/User";
 import { getRegistrationByEmail } from "../Entities/Registration";
 import {getChatUsers, getLatestChatRoomMessage} from "../Entities/Message"
@@ -136,6 +136,11 @@ export const handleUpdateProfilePicture = async (req: Request, res: Response) =>
 export const handleUpdatePassword = async (req: Request, res: Response) => {
   try {
     const {email, token, password} = req.body
+    console.log("=============================")
+    console.log("Email: ", email)
+    console.log("Token: ", token)
+    console.log("Password: ", password)
+
 
     if (!token) {
       return res.json(customPayloadResponse(false, "Token is required")).status(200).end();
@@ -144,13 +149,25 @@ export const handleUpdatePassword = async (req: Request, res: Response) => {
       return res.json(customPayloadResponse(false, "Password is required")).status(200).end();
     }
 
+    const userProfile = await getUserByEmail(email)
+
+    if (!userProfile) {
+      return res.json(customPayloadResponse(false, "User not found")).status(200).end();
+    }
+
     const userToken = await getRessetToken(email)
+    console.log("Usertoken: ", userToken)
 
     if (userToken !== token) {
       return res.json(customPayloadResponse(false, "Invalid Token")).status(200).end();
     }
 
-    const user = await updatePassword(email, password)
+    const hashedPassword = await hashPassword(password, 10);
+    if (hashPassword === undefined || hashPassword === null) {
+      return res.json(customPayloadResponse(false, "User not found")).status(200).end();
+    }
+    // @ts-ignore
+    const user = await updatePassword(email, hashedPassword)
 
     return res.json(customPayloadResponse(true, user)).status(200).end();
 

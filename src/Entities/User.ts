@@ -143,13 +143,16 @@ export const getUserById = async (id: number) => {
 }
 
 export const getUserByEmail = async (email: string) => {
-    const user = User.findOne({
+    const users = await User.find({
         where: {
             email: email
         }
     })
+    if (users.length === 0) {
+        return null
+    }
 
-    return user
+    return users[0]
 }
 
 export const getUserPassword = async (email: string) => {
@@ -174,18 +177,18 @@ export const updateProfilePicture = async (id: number, profile_picture: string) 
 }
 
 export const getRessetToken = async (email: string) => {
-    const user = await User.findOne({
+    const users = await User.find({
         where: {
-            email
+            email: email
+            
         },
         select: ["reset_token"]
     })
-
-    if (!user) {
-        throw new Error("User not found")
+    if (users.length === 0) {
+        return null
     }
 
-    return user.reset_token;
+    return users[0].reset_token
 }
 
 export const generateSixDigitCode = () => {
