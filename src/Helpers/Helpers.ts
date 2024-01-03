@@ -53,14 +53,14 @@ export const validatePassword = async (
 
 export const getAuthAccessToken = (user: object, token: any) => {
   const accessToken = sign(JSON.parse(JSON.stringify(user)), token, {
-    expiresIn: "1d",
+    expiresIn: "365d",
   });
   return accessToken;
 };
 
 export const getAuthRefreshToken = (user: object, token: any) => {
   const refreshToken = sign(JSON.parse(JSON.stringify(user)), token, {
-    expiresIn: "2d",
+    expiresIn: "365d",
   });
   return refreshToken;
 };
